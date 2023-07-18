@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>New chat</title>
+    <link rel="stylesheet" href="chatpage.css">
+</head>
+
+<body>
+    <header>
+        <button id="apiRerolad" onclick="window.location.reload()"><span>♻️ &nbsp; 정보 갱신</span></button>
+    </header>
+
+    <div id="chatpage">
+        <div id="ex">
+            <h1 id="title">ChatHSF</h1>
+
+            <div id="exfx">
+
+                <div id="exul" class="hv">
+                    <div id="exicon">icon</div>
+                    <div id="extitle">예시</div>
+                    <div id="extxt" onclick="ex(this)">"서울 은평구에 위치한 특성화고<br>를 찾아줘" →</div>
+                    <div id="extxt" onclick="ex(this)">"세명컴퓨터고등학교에 대한 정<br>보를 알려줘" →</div>
+                    <div id="extxt" onclick="ex(this)">"서울의 일반고 중에서 남녀공학 <br>만 찾아줘" →</div>
+                </div>
+
+                <div id="exul">
+                    <div id="exicon">icon</div>
+                    <div id="extitle">기능</div>
+                    <div id="extxt">고등학교의 위치와 종류로 찾을<br>수 있습니다.</div>
+                    <div id="extxt">고등학교 위치가 표시된 지도<br>및 로드뷰를 제공합니다.</div>
+                    <div id="extxt">고등학교 정보 갱신 명령어 : <br>!업데이트</div>
+                </div>
+
+                <div id="exul">
+                    <div id="exicon">icon</div>
+                    <div id="extitle">한계</div>
+                    <div id="extxt">매년 6월에 새로운 학교 정보가 <br>갱신됩니다.</div>
+                    <div id="extxt">부정확한 학교 정보를 제공할 수<br> 있습니다.</div>
+                    <div id="extxt">질문을 정확하게 이해하지 못할<br> 수 있습니다.</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="search">
+            <input type="text" class="searchbar" placeholder="채팅으로 질문하기" id="searchbar">
+
+            <!-- <img src="send.png" alt="" id="sendimg" onclick="pbchk()"> -->
+
+        </div>
+
+    </div>
+
+    <div id="schlist"></div>
+</body>
+<script src="chatpage.js"></script>
+
+<script>
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+//   axios.get('https://www.schoolinfo.go.kr/openApi.do?apiKey=09f9b2bf2e3b4daea8e4f4b88f22b7df&apiType=0&pbanYr=2022&schulKndCode=04')
+//     .then(response => {
+//       console.log(response.data);
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+</script>
+
+
+</html>

@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #c5c5c5;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #acacac;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+body {
+    overflow: hidden;
+}
+
+header {
+    width: 245px;
+    height: 100vh;
+    background-color: #202123;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    float: left;
+    position: relative;
+    z-index: 1;
+}
+
+#apiRerolad {
+    width: 100%;
+    height: 45px;
+    background: none;
+    cursor: pointer;
+    border: 1px solid #e2e2e742;
+    color: white;
+    border-radius: 7px;
+    transition-duration: .2s;
+    position: relative;
+    z-index: 1;
+}
+
+#apiRerolad:hover {
+    background-color: #54545531;
+}
+
+header>button>span {
+    padding: 12px;
+    position: relative;
+    right: 65px;
+    font-size: 14px;
+}
+
+#chatpage {
+    text-align: center;
+    position: relative;
+    height: 900px;
+    overflow-y: scroll;
+}
+
+#exul {
+    display: inline-block;
+}
+
+#extitle {
+    font-size: 18px;
+    color: #343541;
+    margin: 12px;
+    font-weight: bold;
+}
+
+#title {
+    padding-top: 200px;
+    padding-bottom: 60px;
+    color: #343541;
+    font-size: 35px;
+    font-family: 'hy견고딕';
+}
+
+#extxt {
+    background-color: #f7f7f8;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 14px;
+    margin-bottom: 12px;
+    margin-right: 12px;
+    transition-duration: .3s;
+}
+
+.hv>#extxt:hover {
+    background-color: #d9d9e38a;
+    cursor: pointer;
+}
+
+#exfx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 270px;
+}
+
+.searchbar {
+    width: 740px;
+    padding: 15px;
+    height: 25px;
+    border-radius: 13px;
+    border: solid #d9d9e3 1px;
+    box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.24);
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+}
+
+#search {
+    position: fixed;
+    top: 91.5%;
+    left: 50%;
+    transform: translate(-33.5%, -50%);
+}
+
+.searchbar::placeholder {
+    color: rgba(128, 128, 128, 0.616);
+    font-weight: bold;
+}
+
+.Chat {
+    border-bottom: #d9d9e3 solid 1px;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 30px;
+}
+
+#myChat {
+    background-color: white;
+}
+
+#botChat {
+    background-color: rgba(243, 243, 243, 0.8);
+}
+
+#chatsValue {
+    width: 700px;
+    text-align: start;
+    float: left;
+}
+
+#Icon {
+    width: 30px;
+    float: left;
+    margin-right: 20px;
+    float: left;
+}
+
+#scrollDiv{
+    height: 100px;
+}
