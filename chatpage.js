@@ -81,3 +81,17 @@ function Chat(who, chatVal) {
         document.getElementById('chatpage').appendChild(scrollDiv);
     }
 }
+
+fetch('https://www.schoolinfo.go.kr/openApi.do?apiKey=09f9b2bf2e3b4daea8e4f4b88f22b7df&apiType=0&pbanYr=2022&schulKndCode=04')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('API 호출에 실패했습니다.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data)
+    })
+    .catch(error => {
+        console.error(error);
+    });
