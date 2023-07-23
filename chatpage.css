@@ -163,6 +163,7 @@ input:focus {
     float: left;
     margin-right: 20px;
     float: left;
+    border-radius: 5px;
 }
 
 #scrollDiv{
