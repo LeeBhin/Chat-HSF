@@ -125,7 +125,7 @@ function address_Only(input, jsonDataArray) {
     input = input.replace(/ /g, "");
     const result = [];
 
-    const regions = ['경상도', '전라도', '충청도', '경상', '전라', '충청', '경남', '경북', '전남', '전북', '충남', '충북', '전국', '대한민국', '한국'];
+    const regions = ['경상도', '전라도', '충청도', '경상', '전라', '충청', '경남', '경북', '전남', '전북', '충남', '충북', '전국', '대한민국', '한국', '국내'];
     regions.forEach(region => {
         if (input.includes(region)) {
             if (region == '경상도' || region == '경상') {
@@ -161,7 +161,7 @@ function address_Only(input, jsonDataArray) {
             } else if (region == '충북') {
                 result.push('충청북도')
                 input = input.replace(region, '');
-            } else if (region == '전국' || '한국' || '대한민국') {
+            } else if (region == '전국' || '한국' || '대한민국' || '국내') {
                 Sp = true;
                 result.push('경상남도')
                 result.push('경상북도')
