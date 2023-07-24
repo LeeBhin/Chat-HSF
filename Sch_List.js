@@ -1,32 +1,88 @@
+const allinfo = localStorage.getItem('schinfo');
+const All_Info = JSON.parse(allinfo)
 /**
- * 주어진 데이터에서 필터링된 학교 리스트를 반환하는 함수
- * @param {Array} jsonData - 전체 학교 데이터 배열
- * @param {Array} addressClean - 주소 필터링에 사용할 주소 배열
- * @param {Array} typeArray - 종류 필터링에 사용할 종류 배열
- * @param {Array} gender_Clean - 성별 필터링에 사용할 성별 배열
- * @returns {string} - 필터링된 학교 리스트 문자열
+ * 
+ * @param {All_Info} jsonData 
+ * @param {Address} addressClean 
+ * @param {Type} typeArray 
+ * @param {Gender} gender_Clean 
+ * @returns 
  */
-function getListFunction(jsonData, addressClean = [], typeArray = [], gender_Clean = []) {
-    const filteredData = jsonData.filter(data =>
-        (addressClean.length === 0 || addressClean.some(address =>
-            data.SCHUL_RDNMA.includes(address) || data.ADRES_BRKDN.includes(address)
-        )) &&
-        (typeArray.length === 0 || typeArray.some(type =>
-            data.HS_KND_SC_NM.includes(type)
-        )) &&
-        (gender_Clean.length === 0 || gender_Clean.includes(data.COEDU_SC_CODE))
-    );
+function ListFunction(jsonData, addressClean, typeArray, gender_Clean) {    //주소,종류,성별 필터
+    if (!addressClean) {
+        addressClean = [];
+    }
 
-    const printData = filteredData.map(data => `⦁ ${data.SCHUL_NM}`).join('\n');
-    return printData;
+    if (!typeArray) {
+        typeArray = [];
+    }
+
+    if (!gender_Clean) {
+        gender_Clean = [];
+    }
+    if (Sp) {   //지역
+        const filteredData = jsonData.filter(data =>
+            (addressClean.length === 0 || addressClean.some(address => //주소 필터
+                data.SCHUL_RDNMA.includes(address) || data.ADRES_BRKDN.includes(address)
+            )) &&
+            (typeArray.length === 0 || typeArray.some(type => //종류 필터
+                data.HS_KND_SC_NM.includes(type)
+            )) &&
+            (gender_Clean.length === 0 || gender_Clean.includes(data.COEDU_SC_CODE))    //성별 필터
+        ).map(data => data.SCHUL_NM);
+
+        const printData = filteredData.map(data => '⦁ ' + data.toString()).join('\n');
+        return printData
+
+    } else {
+        const filteredData = jsonData.filter(data =>
+            (addressClean.length === 0 || addressClean.every(address => //주소 필터
+                data.SCHUL_RDNMA.includes(address) || data.ADRES_BRKDN.includes(address)
+            )) &&
+            (typeArray.length === 0 || typeArray.some(type => //종류 필터
+                data.HS_KND_SC_NM.includes(type)
+            )) &&
+            (gender_Clean.length === 0 || gender_Clean.includes(data.COEDU_SC_CODE))    //성별 필터
+        ).map(data => data.SCHUL_NM);
+
+        const printData = filteredData.map(data => '⦁ ' + data.toString()).join('\n');
+        return printData
+    }
 }
 
-/**
- * 주어진 문자열에서 특정 키워드를 예외 처리하여 반환하는 함수
- * @param {string} str - 예외 처리할 문자열
- * @returns {string} - 예외 처리된 문자열
- */
-function stringFilter(str) {
+function stringFilter(str) {    //예외 처리
+    str = str.replace(/일반고등학교|일반고|일반학교/g, "Common");
+    str = str.replace(/특성화고등학교|특성화고|특성화학교/g, "Special");
+    str = str.replace(/특수목적고등학교|특목고|특수목적고|특수목적학교|특목학교/g, "Purpose");
+    str = str.replace(/자율고등학교|자율고|자율학교/g, "Free");
+    str = str.replace(/여자고등학교|여고|여자고|여자학교|여학교/g, "Female");
+    str = str.replace(/남자고등학교|남고|남자고|남자학교|남학교/g, "Male");
+    str = str.replace(/고등학교/g, " ");
+    str = str.replace(/공학|공학학교/g, "Mixed");
+    str = str.replace(/서울/g, "서울특별시");
+    str = str.replace(/제주|제주도/g, "제주특별자치도");
+    str = str.replace(/강원|강원도/g, "강원특별자치도");
+    return str
+}
+
+function filtered_to_Keyword(str) {
+    const typeKeywords = ['Common', 'Special', 'Purpose', 'Free'];
+    const genderKeywords = ['Female', 'Male', 'Mixed'];
+
+    const result = {};
+
+    // Type 키워드 찾기
+    const foundTypes = typeKeywords.filter(keyword => str.includes(keyword));
+    if (foundTypes.length > 0) {
+        result.Type = foundTypes;
+    }
+
+    // Gender 키워드 찾기
+    const foundGenders = genderKeywords.filter(keyword => str.includes(keyword));
+    if (foundGenders.length > 0) {
+        result.Gender = foundGenders;
+    }
+
     const replacements = {
         "Common": "일반고등학교",
         "Special": "특성화고등학교",
@@ -37,110 +93,95 @@ function stringFilter(str) {
         "Mixed": "남녀공학"
     };
 
-    return str.replace(/일반고등학교|일반고|일반학교|특성화고등학교|특성화고|특성화학교|특수목적고등학교|특목고|특수목적고|특수목적학교|특목학교|자율고등학교|자율고|자율학교|여자고등학교|여고|여자고|여자학교|여학교|남자고등학교|남고|남자고|남자학교|남학교|고등학교|공학|공학학교|서울|제주|제주도/g, match => replacements[match] || match);
-}
-
-/**
- * 문자열에서 종류와 성별에 해당하는 키워드를 추출하여 반환하는 함수
- * @param {string} str - 추출할 키워드가 있는 문자열
- * @returns {Object} - 추출된 종류와 성별 키워드를 담은 객체
- */
-function extractKeywords(str) {
-    const typeKeywords = ['Common', 'Special', 'Purpose', 'Free'];
-    const genderKeywords = ['Female', 'Male', 'Mixed'];
-
-    const result = {};
-
-    typeKeywords.forEach(keyword => {
-        if (str.includes(keyword)) {
-            result.Type = result.Type || [];
-            result.Type.push(keyword);
+    for (const key in result) {
+        const values = result[key];
+        for (let i = 0; i < values.length; i++) {
+            values[i] = replacements[values[i]] || values[i];
         }
-    });
-
-    genderKeywords.forEach(keyword => {
-        if (str.includes(keyword)) {
-            result.Gender = result.Gender || [];
-            result.Gender.push(keyword);
-        }
-    });
-
+    }
     return result;
 }
 
-/**
- * 검색어를 받아서 필터링된 학교 리스트와 관련된 정보를 반환하는 함수
- * @param {string} searchString - 검색어 문자열
- * @returns {Object} - 필터링된 학교 리스트와 관련된 정보를 담은 객체
- */
-function getSchoolList(searchString) {
-    const filteredString = stringFilter(searchString); // 예외 처리된 문자열
-    const keywords = extractKeywords(filteredString); // 종류, 성별 키워드
-    const addressList = getAddressList(filteredString, All_Info); // 주소 리스트
+function SchList(string) {
+    var Filtered = stringFilter(string) //예외 처리된 문자열
+    var Keyword = filtered_to_Keyword(Filtered) //종류,성별
+    var adr = address_Only(Filtered, All_Info)  //주소 리스트
+    var Types = Keyword.Type
+    var Genders = Keyword.Gender
+    const Address = Array.from(new Set(adr.filter(Boolean)));
 
-    const result = {
-        List: getListFunction(All_Info, addressList, keywords.Type, keywords.Gender),
-        address_Return: addressList,
-        types_Return: keywords.Type,
-        genders_Return: keywords.Gender
+    var result = {
+        "List": ListFunction(All_Info, Address, Types, Genders),
+        "address_Return": Address,
+        "types_Return": Types,
+        "genders_Return": Genders
     };
 
     return result;
 }
 
-var Sp = false;
-
-/**
- * 주소를 추출하여 배열로 반환하는 함수
- * @param {string} input - 추출할 주소를 포함하는 문자열
- * @param {Array} jsonDataArray - 전체 학교 데이터 배열
- * @returns {Array} - 추출된 주소를 담은 배열
- */
-function getAddressList(input, jsonDataArray) {
+var Sp = false
+function address_Only(input, jsonDataArray) {
     input = input.replace(/ /g, "");
-
-    const regions = ['경상도', '전라도', '충청도', '경상', '전라', '충청', '경남', '경북', '전남', '전북', '충남', '충북'];
     const result = [];
 
+    const regions = ['경상도', '전라도', '충청도', '경상', '전라', '충청', '경남', '경북', '전남', '전북', '충남', '충북', '전국', '대한민국', '한국'];
     regions.forEach(region => {
         if (input.includes(region)) {
-            if (region === '경상도' || region === '경상') {
+            if (region == '경상도' || region == '경상') {
                 Sp = true;
-                result.push('경상남도', '경상북도');
+                result.push('경상남도')
+                result.push('경상북도')
                 input = input.replace(region, '');
-            } else if (region === '전라도' || region === '전라') {
+            } else if (region == '전라도' || region == '전라') {
                 Sp = true;
-                result.push('전라남도', '전라북도');
+                result.push('전라남도')
+                result.push('전라북도')
                 input = input.replace(region, '');
-            } else if (region === '충청도' || region === '충청') {
+            } else if (region == '충청도' || region == '충청') {
                 Sp = true;
-                result.push('충청남도', '충청북도');
+                result.push('충청남도')
+                result.push('충청북도')
                 input = input.replace(region, '');
-            } else if (region === '경남') {
-                result.push('경상남도');
+            } else if (region == '경남') {
+                result.push('경상남도')
                 input = input.replace(region, '');
-            } else if (region === '경북') {
-                result.push('경상북도');
+            } else if (region == '경북') {
+                result.push('경상북도')
                 input = input.replace(region, '');
-            } else if (region === '전남') {
-                result.push('전라남도');
+            } else if (region == '전남') {
+                result.push('전라남도')
                 input = input.replace(region, '');
-            } else if (region === '전북') {
-                result.push('전라북도');
+            } else if (region == '전북') {
+                result.push('전라북도')
                 input = input.replace(region, '');
-            } else if (region === '충남') {
-                result.push('충청남도');
+            } else if (region == '충남') {
+                result.push('충청남도')
                 input = input.replace(region, '');
-            } else if (region === '충북') {
-                result.push('충청북도');
+            } else if (region == '충북') {
+                result.push('충청북도')
                 input = input.replace(region, '');
-            } else {
-                result.push(region);
+            } else if (region == '전국' || '한국' || '대한민국') {
+                Sp = true;
+                result.push('경상남도')
+                result.push('경상북도')
+                result.push('전라남도')
+                result.push('전라북도')
+                result.push('충청남도')
+                result.push('충청북도')
+                result.push('강원특별자치도')
+                result.push('경기도')
+                result.push('제주특별자치도')
                 input = input.replace(region, '');
             }
-        }
-    });
+            else {
+                result.push(region)
+                input = input.replace(region, '');
+            }
 
+        }
+
+    });
     const checkArray = (arr) => {
         for (let i = 0; i < arr.length; i++) {
             if (input.includes(arr[i]) || isSubstringInOrder(input, arr[i])) {
@@ -176,8 +217,7 @@ function getAddressList(input, jsonDataArray) {
             checkArray(jsonData.SCHUL_RDNMA.split(' '), 'SCHUL_RDNMA');
         }
     }
-
     return result;
 }
 
-export { getSchoolList };
+export { SchList }

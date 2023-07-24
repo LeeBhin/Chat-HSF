@@ -26,7 +26,6 @@ function ex(element) {
 
 // 검색창 엔터키 이벤트 리스너 추가
 search.addEventListener('keydown', function (event) {
-    console.log(event.key);
     var question = search.value;
 
     if (event.key === 'Enter') {
@@ -42,7 +41,6 @@ function send(question) {
         document.getElementById('ex').remove();
         example = false;
     }
-    console.log(question);
 
     Chat('me', question);
     Chat('bot', Answer(question))
