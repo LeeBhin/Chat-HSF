@@ -23,8 +23,10 @@ function Answer(Question) {
         var listReturn = SchList(Question)
         console.log(listReturn)
 
-        if (listReturn.address_Return.length == 0) {
-            const Go = Question.split('고')[0] + '고';
+        const Go = Question.split('고')[0] + '고';
+        console.log(Go)
+        console.log(compareStrings(Question,SchInfo(Go)))
+        if (listReturn.address_Return.length == 0 || compareStrings(Question, SchInfo(Go))) {
 
             return info_Print(SchInfo(Go))
         } else if (!listReturn.List) {
@@ -34,6 +36,22 @@ function Answer(Question) {
             return listReturn.List
         }
     }
+}
+
+function compareStrings(a, b) {
+    const lengthA = a.length;
+    const lengthB = b.length;
+    const minLength = Math.min(lengthA, lengthB);
+    const threshold = minLength * 0.7;
+
+    let matchingCount = 0;
+    for (let i = 0; i < minLength; i++) {
+        if (a[i] === b[i]) {
+            matchingCount++;
+        }
+    }
+
+    return (matchingCount >= threshold);
 }
 
 export { Answer }
