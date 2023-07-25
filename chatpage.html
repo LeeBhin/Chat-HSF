@@ -57,13 +57,22 @@
 
     </div>
 
-    <div id="schlist"></div>
+    <!-- <div id="duplicate" style="display: none;"></div> -->
 </body>
 <script type="module" src="chatpage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+<script>
+    // 검색창에 예시 문장 추가하는 함수
+    function ex(element) {
+        document.getElementById('searchbar').value = element.innerText.replace(/["→]/g, "").trim();
+        // document.getElementById('sendimg').style.opacity = '1'
+        // document.getElementById('sendimg').style.cursor = 'pointer'
+    }
+</script>
+
 <script type="module">
-    import { Chat, ex } from "./chatpage.js"
+    import { Chat } from "./chatpage.js"
     import { info, student } from "./testData.js"
     localStorage.setItem('schinfo', JSON.stringify(info))
     localStorage.setItem('stdnt', JSON.stringify(student))

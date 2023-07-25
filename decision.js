@@ -1,8 +1,10 @@
-import { SchInfo, info_Print } from "./Sch_Info.js";
+import { SchInfo, info_Print, printDuplicates, info_PrintC } from "./Sch_Info.js";
 import { SchList } from "./Sch_List.js";
 
 const allinfo = localStorage.getItem('schinfo');
-const All_Info = JSON.parse(allinfo)
+// const All_Info = JSON.parse(allinfo)
+
+var ifDuplicate = false;
 
 function Answer(Question) {
     if (Question == '!업데이트') {
@@ -20,25 +22,49 @@ function Answer(Question) {
     }
 
     else {
-        var listReturn = SchList(Question)
-        console.log(listReturn)
+        try {
+            if (ifDuplicate) {
+                var num = Question.replace(/\D/g, "") * 1;
 
-        const Go = Question.split('고')[0] + '고';
-        console.log(Go)
-        console.log(compareStrings(Question,SchInfo(Go)))
-        if (listReturn.address_Return.length == 0 || compareStrings(Question, SchInfo(Go))) {
+                var code = schulCodes[num - 1];
 
-            return info_Print(SchInfo(Go))
-        } else if (!listReturn.List) {
-            return '죄송하지만 찾을 수가 없네요.'
-        }
-        else {
-            return listReturn.List
+                ifDuplicate = false;
+
+                return info_PrintC(code)
+            } else if (!ifDuplicate) {
+                var listReturn = SchList(Question);
+
+                console.log(listReturn)
+                const Go = Question.split('고')[0] + '고';  //'고'까지의 문자열
+
+                var duplicate = printDuplicates(SchInfo(Go));
+                console.log(duplicate)
+
+                if (listReturn.address_Return.length < 1 || compareStrings(Question, SchInfo(Go))) {
+
+                    if (duplicate.length > 1) {  //학교 이름 중복
+
+                        ifDuplicate = true;
+                        return Duplicates(duplicate).map((item, index) => `${index + 1}. ${item}`).join('\n');
+
+                    } else {
+                        return info_Print(SchInfo(Go));
+                    }
+
+                } else if (listReturn.List.length < 1) {
+                    return '죄송하지만 찾을 수가 없네요.'
+                } else {
+                    return listReturn.List;
+                }
+            }
+
+        } catch (error) {
+            return '죄송하지만 질문을 다시 한번 확인해주세요.'
         }
     }
 }
 
-function compareStrings(a, b) {
+function compareStrings(a, b) { //70% 이상 일치하는지
     const lengthA = a.length;
     const lengthB = b.length;
     const minLength = Math.min(lengthA, lengthB);
@@ -52,6 +78,16 @@ function compareStrings(a, b) {
     }
 
     return (matchingCount >= threshold);
+}
+
+var schulCodes;
+
+function Duplicates(data) {
+    const schulRdnas = data.map(item => item.SCHUL_RDNDA);
+
+    schulCodes = data.map(item => item.SCHUL_CODE);
+    console.log(schulCodes)
+    return schulRdnas;
 }
 
 export { Answer }

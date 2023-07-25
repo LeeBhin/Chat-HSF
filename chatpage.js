@@ -17,13 +17,6 @@ search.addEventListener('input', function () {
     }
 });
 
-// 검색창에 예시 문장 추가하는 함수
-function ex(element) {
-    document.getElementById('searchbar').value = element.innerText.replace(/["→]/g, "").trim();
-    // document.getElementById('sendimg').style.opacity = '1'
-    // document.getElementById('sendimg').style.cursor = 'pointer'
-}
-
 // 검색창 엔터키 이벤트 리스너 추가
 search.addEventListener('keydown', function (event) {
     var question = search.value;
@@ -139,4 +132,4 @@ function printOneByOne(text, chatsValue) {
     addNextCharacter();
 }
 
-export { Chat, ex }
+export { Chat }
