@@ -61,6 +61,7 @@ function Answer(Question) {
             }
 
         } catch (error) {
+            console.log(error)
             return '죄송하지만 질문을 다시 한번 확인해주세요.'
         }
     }
