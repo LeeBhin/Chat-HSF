@@ -11,7 +11,7 @@ console.log((All_Info))
  * @param {Gender} gender_Clean 
  * @returns 
  */
-function ListFunction(jsonData, addressClean, typeArray, gender_Clean) {    //주소,종류,성별 필터
+function ListFunction(jsonData, addressClean, typeArray, gender_Clean) {
     if (!addressClean) {
         addressClean = [];
     }
@@ -26,7 +26,7 @@ function ListFunction(jsonData, addressClean, typeArray, gender_Clean) {    //�
     if (Sp) {   //지역
         const filteredData = jsonData.filter(data =>
             (addressClean.length === 0 || addressClean.some(address => //주소 필터
-                data.SCHUL_RDNMA.includes(address) || data.ADRES_BRKDN.includes(address)
+                (data.SCHUL_RDNMA && data.SCHUL_RDNMA.includes(address)) || (data.ADRES_BRKDN && data.ADRES_BRKDN.includes(address))
             )) &&
             (typeArray.length === 0 || typeArray.some(type => //종류 필터
                 data.HS_KND_SC_NM.includes(type)
@@ -40,7 +40,7 @@ function ListFunction(jsonData, addressClean, typeArray, gender_Clean) {    //�
     } else {
         const filteredData = jsonData.filter(data =>
             (addressClean.length === 0 || addressClean.every(address => //주소 필터
-                data.SCHUL_RDNMA.includes(address) || data.ADRES_BRKDN.includes(address)
+                (data.SCHUL_RDNMA && data.SCHUL_RDNMA.includes(address)) || (data.ADRES_BRKDN && data.ADRES_BRKDN.includes(address))
             )) &&
             (typeArray.length === 0 || typeArray.some(type => //종류 필터
                 data.HS_KND_SC_NM.includes(type)
@@ -52,6 +52,7 @@ function ListFunction(jsonData, addressClean, typeArray, gender_Clean) {    //�
         return printData
     }
 }
+
 
 function stringFilter(str) {    //예외 처리
     str = str.replace(/일반고등학교|일반고|일반학교/g, "Common");
