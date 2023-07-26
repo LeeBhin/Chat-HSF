@@ -15,8 +15,8 @@
     import { Chat } from "./chatpage.js";
     import { info, student } from "./testData.js";
 
-    localStorage.setItem('schinfo', JSON.stringify(info));
-    localStorage.setItem('stdnt', JSON.stringify(student));
+    // localStorage.setItem('schinfo', JSON.stringify(info));
+    // localStorage.setItem('stdnt', JSON.stringify(student));
 
 </script>
 
@@ -54,7 +54,7 @@
                     <div id="exicon">icon</div>
                     <div id="extitle">한계</div>
                     <div id="extxt">매년 6월에 새로운 학교 정보가 <br>갱신됩니다.</div>
-                    <div id="extxt">부정확한 학교 정보를 제공할 수<br> 있습니다.</div>
+                    <div id="extxt">질문 시 행정구역 (시, 구, 동 ...)<br>을 붙여주세요.</div>
                     <div id="extxt">질문을 정확하게 이해하지 못할<br> 수 있습니다.</div>
                 </div>
             </div>
@@ -85,29 +85,29 @@
 </script>
 
 <script>
-    // const schinfo = localStorage.getItem('schinfo');
-    // const stdnt = localStorage.getItem('stdnt');
-    // const lastUpdated = localStorage.getItem('lastUpdated');
-    // const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+    const schinfo = localStorage.getItem('schinfo');
+    const stdnt = localStorage.getItem('stdnt');
+    const lastUpdated = localStorage.getItem('lastUpdated');
+    const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
 
-    // if (!schinfo || !stdnt || !lastUpdated || new Date().getTime() - parseInt(lastUpdated) >= oneWeekInMilliseconds) {  //스토리지에 데이터가 없거나 마지막으로 저장한지 일주일이 지났다면
-    //     axios.get('/.netlify/functions/api')
-    //         .then(function (response) {
-    //             const data = response.data;
-    //             const schinfo = data[0].list;
-    //             const stdnt = data[1].list;
-    //             const currentTime = new Date().getTime();
+    if (!schinfo || !stdnt || !lastUpdated || new Date().getTime() - parseInt(lastUpdated) >= oneWeekInMilliseconds) {  //스토리지에 데이터가 없거나 마지막으로 저장한지 일주일이 지났다면
+        axios.get('/.netlify/functions/api')
+            .then(function (response) {
+                const data = response.data;
+                const schinfo = data[0].list;
+                const stdnt = data[1].list;
+                const currentTime = new Date().getTime();
 
-    //             localStorage.setItem('schinfo', JSON.stringify(schinfo));
-    //             localStorage.setItem('stdnt', JSON.stringify(stdnt));
-    //             localStorage.setItem('lastUpdated', currentTime.toString());
-    //             window.location.reload();
-    //         })
-    //         .catch(function (error) {
-    //             alert('오류가 발생했습니다. 새로고침해주세요.\n' + error)
-    //             window.location.reload();
-    //         });
-    // }
+                localStorage.setItem('schinfo', JSON.stringify(schinfo));
+                localStorage.setItem('stdnt', JSON.stringify(stdnt));
+                localStorage.setItem('lastUpdated', currentTime.toString());
+                window.location.reload();
+            })
+            .catch(function (error) {
+                alert('오류가 발생했습니다. 새로고침해주세요.\n' + error)
+                window.location.reload();
+            });
+    }
 
 
 </script>

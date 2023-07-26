@@ -37,10 +37,9 @@ function Answer(Question) {
 
                 console.log(listReturn)
                 const Go = Question.split('고')[0] + '고';  //'고'까지의 문자열
-
                 var duplicate = printDuplicates(SchInfo(Go));
 
-                if (compareStrings(Question, SchInfo(Go))) {
+                if (compareStrings(Question, SchInfo(Go)) && !listReturn.types_Return && !listReturn.genders_Return) {
 
                     if (duplicate.length > 1) {  //학교 이름 중복
 
@@ -71,11 +70,11 @@ function compareStrings(str1, str2) {
     const commonCharacters = [];
 
     for (const char1 of str1) {
-      if (str2.includes(char1) && !commonCharacters.includes(char1)) {
-        commonCharacters.push(char1);
-      }
+        if (str2.includes(char1) && !commonCharacters.includes(char1)) {
+            commonCharacters.push(char1);
+        }
     }
-  
+
     return commonCharacters.join('').length >= 3;
 }
 
