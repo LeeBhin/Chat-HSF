@@ -97,8 +97,8 @@
                 const stdnt = data[1].list;
                 const currentTime = new Date().getTime();
 
-                localStorage.setItem('schinfo', JSON.stringify(schinfo));
-                localStorage.setItem('stdnt', JSON.stringify(stdnt));
+                localStorage.setItem('schinfo', JSON.stringify(schinfo)).slice(8, -1);
+                localStorage.setItem('stdnt', JSON.stringify(stdnt)).slice(8, -1);
                 localStorage.setItem('lastUpdated', currentTime.toString());
                 window.location.reload();
             })
