@@ -13,8 +13,6 @@ function Answer(Question) {
         localStorage.removeItem('lastUpdated');
         window.location.reload();
     }
-    const schinfo = JSON.parse(localStorage.getItem('schinfo'));
-    const stdnt = JSON.parse(localStorage.getItem('stdnt'));
 
     if (!schinfo || !stdnt) {
         return '데이터 로딩중입니다... 잠시만 기다려주세요!\n(데이터 갱신 주기 : 일주일)'

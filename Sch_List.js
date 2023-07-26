@@ -1,5 +1,8 @@
 const allinfo = localStorage.getItem('schinfo');
 const All_Info = JSON.parse(allinfo)
+console.log(typeof(allinfo))
+console.log(typeof(All_Info))
+console.log((All_Info))
 /**
  * 
  * @param {All_Info} jsonData 
