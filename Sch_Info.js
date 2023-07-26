@@ -90,12 +90,17 @@ function printDuplicates(Sch) {
     return filteredInfo.map(({ SCHUL_NM, SCHUL_RDNDA, SCHUL_CODE }) => ({ SCHUL_NM, SCHUL_RDNDA, SCHUL_CODE }));
 }
 
+var schcode;
+
 // 학교 정보 출력 함수
 function info_Print(School) {
     const schoolData = All_Info.find(item => item.SCHUL_NM === School);
     const stdntData = Stdnt(School)[0];
     const MS = stdntData.COL_MSUM + '명';
     const WS = stdntData.COL_WSUM + '명';
+
+    schcode = schoolData.SCHUL_CODE
+    document.getElementById('code').innerText = schcode
 
     // const Birth = date(schoolData.FOND_YMD);
     const Open = date(schoolData.FOAS_MEMRD);
@@ -113,6 +118,8 @@ function info_PrintC(code) {
     const MS = stdntData.COL_MSUM + '명';
     const WS = stdntData.COL_WSUM + '명';
 
+    schcode = schoolData.SCHUL_CODE
+    document.getElementById('code').innerText = schcode
 
     // const Birth = date(schoolData.FOND_YMD);
     const Open = date(schoolData.FOAS_MEMRD);
@@ -128,4 +135,12 @@ function date(date) {
     return date.substring(0, 4) + '년 ' + date.substring(4, 6) + '월 ' + date.substring(6) + '일';
 }
 
-export { SchInfo, printDuplicates, info_Print, info_PrintC };
+// 학교 코드로 학교 위치를 필터링하는 함수
+function findCode(SchoolCode) {
+    return All_Info
+        .filter(item => item.SCHUL_CODE === SchoolCode)
+        .map(({ LTTUD, LGTUD }) => ({ LTTUD, LGTUD }));
+
+}
+
+export { SchInfo, printDuplicates, info_Print, info_PrintC, findCode };

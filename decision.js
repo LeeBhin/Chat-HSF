@@ -30,6 +30,7 @@ function Answer(Question) {
 
                 ifDuplicate = false;
 
+                document.getElementById('answertype').innerText = 'info'
                 return info_PrintC(code)
             } else if (!ifDuplicate) {
                 var listReturn = SchList(Question);
@@ -38,22 +39,24 @@ function Answer(Question) {
                 const Go = Question.split('고')[0] + '고';  //'고'까지의 문자열
 
                 var duplicate = printDuplicates(SchInfo(Go));
-                console.log(duplicate)
 
-                if (listReturn.address_Return.length < 1 || compareStrings(Question, SchInfo(Go))) {
+                if (compareStrings(Question, SchInfo(Go))) {
 
                     if (duplicate.length > 1) {  //학교 이름 중복
 
                         ifDuplicate = true;
+                        document.getElementById('answertype').innerText = 'number'
                         return Duplicates(duplicate).map((item, index) => `${index + 1}. ${item}`).join('\n');
 
                     } else {
-                        return info_Print(SchInfo(Go));
+                        document.getElementById('answertype').innerText = 'info'
+                        return info_Print(SchInfo(Go))
                     }
 
-                } else if (listReturn.List.length < 1) {
+                } else if (!compareStrings(Question, SchInfo(Go))) {
                     return '죄송하지만 찾을 수가 없네요.'
                 } else {
+                    document.getElementById('answertype').innerText = 'list'
                     return listReturn.List;
                 }
             }
@@ -64,21 +67,18 @@ function Answer(Question) {
     }
 }
 
-function compareStrings(a, b) { //70% 이상 일치하는지
-    const lengthA = a.length;
-    const lengthB = b.length;
-    const minLength = Math.min(lengthA, lengthB);
-    const threshold = minLength * 0.7;
+function compareStrings(str1, str2) {
+    const commonCharacters = [];
 
-    let matchingCount = 0;
-    for (let i = 0; i < minLength; i++) {
-        if (a[i] === b[i]) {
-            matchingCount++;
-        }
+    for (const char1 of str1) {
+      if (str2.includes(char1) && !commonCharacters.includes(char1)) {
+        commonCharacters.push(char1);
+      }
     }
-
-    return (matchingCount >= threshold);
+  
+    return commonCharacters.join('').length >= 3;
 }
+
 
 var schulCodes;
 

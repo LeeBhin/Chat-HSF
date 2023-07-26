@@ -1,5 +1,7 @@
 import { Answer } from "./decision.js"
 
+import { findCode } from "./Sch_Info.js";
+
 // 초기 변수 설정
 var example = true;
 
@@ -130,6 +132,17 @@ function printOneByOne(text, chatsValue) {
     }
 
     addNextCharacter();
+
+    if (document.getElementById('answertype').innerText == 'info') {
+        setTimeout(() => {
+            var wandg = findCode(document.getElementById('code').innerText)
+            var w = wandg[0].LGTUD
+            var g = wandg[0].LTTUD
+
+            console.log(w + '\n' + g)
+        }, 3000);
+
+    }
 }
 
 export { Chat }
