@@ -9,6 +9,7 @@
 
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a5e1249e2f89aba26082905963e3cbc"></script>
+    <script type="text/javascript" src="map.js"></script>
 </head>
 
 <script type="module">
@@ -81,9 +82,7 @@
         // document.getElementById('sendimg').style.opacity = '1'
         // document.getElementById('sendimg').style.cursor = 'pointer'
     }
-</script>
 
-<script>
     const schinfo = localStorage.getItem('schinfo');
     const stdnt = localStorage.getItem('stdnt');
     const lastUpdated = localStorage.getItem('lastUpdated');
@@ -108,6 +107,19 @@
             });
     }
 
+    // 지도와 로드뷰를 감싸고 있는 div의 class를 변경하여 지도를 숨기거나 보이게 하는 함수입니다 
+    function toggleMap(active, clickedButton) {
+        // 클릭한 버튼 요소의 부모 요소를 찾습니다.
+        var container = clickedButton.closest('#container');
+
+        if (container) {
+            if (active) {
+                container.className = "view_map"; // 지도가 보이도록 클래스 변경
+            } else {
+                container.className = "view_roadview"; // 로드뷰가 보이도록 클래스 변경
+            }
+        }
+    }
 
 </script>
 
