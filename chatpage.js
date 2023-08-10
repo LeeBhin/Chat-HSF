@@ -195,7 +195,7 @@ function drawMap(w, g) {
     // 로드뷰의 파노라마 ID는 Wizard를 사용하면 쉽게 얻을수 있습니다 
 
     var rvPosition = new kakao.maps.LatLng(w, g);
-    rc.getNearestPanoId(rvPosition, 50, function (panoid) {
+    rc.getNearestPanoId(rvPosition, 200, function (panoid) {
         roadview.setPanoId(panoid, rvPosition);//좌표에 근접한 panoId를 통해 로드뷰를 실행합니다.
     });
 
