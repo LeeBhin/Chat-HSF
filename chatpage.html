@@ -21,11 +21,17 @@
 </script>
 
 <body>
+    <div id="up" class="updn" onclick="scrollToTop()">↑</div>
+    <div id="down" class="updn" onclick="scrollToBottom()">↓</div>
     <header>
-        <button id="apiRerolad" onclick="localStorage.clear(); window.location.reload();">
+        <button id="apiReload" onclick="localStorage.clear(); window.location.reload();">
             <span>♻️ &nbsp; 정보 갱신</span>
         </button>
 
+        <div id="log">log</div>
+
+        <div id="logs">
+        </div>
     </header>
 
     <div id="chatpage">
@@ -52,7 +58,7 @@
 
                 <div id="exul">
                     <div id="exicon">icon</div>
-                    <div id="extitle">한계</div>
+                    <div id="extitle">주의</div>
                     <div id="extxt">매년 6월에 새로운 학교 정보가 <br>갱신됩니다.</div>
                     <div id="extxt">질문 시 행정구역 (시, 구, 동 ...)<br>을 붙여주세요.</div>
                     <div id="extxt">질문을 정확하게 이해하지 못할<br> 수 있습니다.</div>
@@ -76,6 +82,22 @@
 </body>
 
 <script>
+
+    function scrollToTop() {
+        document.getElementById('chatpage').scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollToBottom() {
+        ph = document.getElementById('chatpage').scrollHeight
+        document.getElementById('chatpage').scrollTo({
+            top: ph,
+            behavior: 'smooth'
+        });
+    }
+
     // 검색창에 예시 문장 추가하는 함수
     function ex(element) {
         document.getElementById('searchbar').value = element.innerText.replace(/["→]/g, "").trim();

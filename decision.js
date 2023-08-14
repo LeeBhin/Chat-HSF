@@ -48,6 +48,10 @@ function Answer(Question) {
 
                     } else {
                         document.getElementById('answertype').innerText = 'info'
+                        document.title = SchInfo(Go)
+                        document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt">
+                            <span> 🏫&nbsp; `+ SchInfo(Go) + `</span>
+                        </button>`);
                         return info_Print(SchInfo(Go))
                     }
 

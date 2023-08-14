@@ -21,6 +21,10 @@
     background-color: #f1f1f1;
 }
 
+#logs::-webkit-scrollbar-track {
+    background: none;
+}
+
 body {
     overflow: hidden;
 }
@@ -35,9 +39,71 @@ header {
     float: left;
     position: relative;
     z-index: 1;
+    flex-wrap: wrap;
 }
 
-#apiRerolad {
+.updn {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: solid 1px rgb(207, 207, 207);
+    position: fixed;
+    z-index: 100000;
+    right: 100px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.updn:hover{
+    background-color: #e7e7e7;
+}
+
+#up {
+    bottom: 200px;
+}
+
+#down {
+    bottom: 175px;
+}
+
+#log {
+    color: #8e8ea0;
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    top: 65px;
+    left: 20px;
+    font-size: 13px;
+}
+
+#logs {
+    width: 100%;
+    height: 88%;
+    margin-top: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#logElmt {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    color: white;
+    border-radius: 7px;
+    background: none;
+    margin: 3px;
+    text-align: start;
+}
+
+#logElmt span {
+    float: left;
+}
+
+#apiReload {
     width: 100%;
     height: 45px;
     background: none;
@@ -50,7 +116,7 @@ header {
     z-index: 1;
 }
 
-#apiRerolad:hover {
+#apiReload:hover {
     background-color: #54545531;
 }
 
@@ -167,15 +233,50 @@ input:focus {
     border-radius: 5px;
 }
 
-#scrollDiv{
+#scrollDiv {
     height: 100px;
 }
 
 
-#container {overflow:hidden;height:300px;position:relative;}
-#btnRoadview,  #btnMap {position:absolute;top:5px;left:5px;padding:7px 12px;font-size:14px;border: 1px solid #dbdbdb;background-color: #fff;border-radius: 2px;box-shadow: 0 1px 1px rgba(0,0,0,.04);z-index:1;cursor:pointer;}
-#btnRoadview:hover,  #btnMap:hover{background-color: #fcfcfc;border: 1px solid #c1c1c1;}
-#container.view_map #mapWrapper {z-index: 10;}
-#container.view_map #btnMap {display: none;}
-#container.view_roadview #mapWrapper {z-index: 0;}
-#container.view_roadview #btnRoadview {display: none;}
+#container {
+    overflow: hidden;
+    height: 300px;
+    position: relative;
+}
+
+#btnRoadview,
+#btnMap {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 7px 12px;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    z-index: 1;
+    cursor: pointer;
+}
+
+#btnRoadview:hover,
+#btnMap:hover {
+    background-color: #fcfcfc;
+    border: 1px solid #c1c1c1;
+}
+
+#container.view_map #mapWrapper {
+    z-index: 10;
+}
+
+#container.view_map #btnMap {
+    display: none;
+}
+
+#container.view_roadview #mapWrapper {
+    z-index: 0;
+}
+
+#container.view_roadview #btnRoadview {
+    display: none;
+}
