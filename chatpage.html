@@ -83,6 +83,72 @@
 
 <script>
 
+    const openDB = () => {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open('myDatabase', 1);
+
+            request.onerror = (event) => {
+                reject('Failed to open database');
+            };
+
+            request.onsuccess = (event) => {
+                const db = event.target.result;
+                resolve(db);
+            };
+
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains('data')) {
+                    const objectStore = db.createObjectStore('data', { keyPath: 'id' });
+                }
+            };
+        });
+    };
+
+    const fetchDataFromAPI = async () => {
+        try {
+            const response = await axios.get('/.netlify/functions/api');
+            const data = response.data;
+            const schinfo = data[0].list;
+            const stdnt = data[1].list;
+            const currentTime = new Date().getTime();
+
+            const db = await openDB();
+            const transaction = db.transaction('data', 'readwrite');
+            const objectStore = transaction.objectStore('data');
+
+            await Promise.all([
+                objectStore.put({ id: 'schinfo', data: schinfo }),
+                objectStore.put({ id: 'stdnt', data: stdnt }),
+                objectStore.put({ id: 'lastUpdated', data: currentTime }),
+            ]);
+            location.reload();
+        } catch (error) {
+            alert('오류가 발생했습니다. 새로고침해주세요.\n' + error);
+            location.reload();
+        }
+    };
+
+    const checkAndUpdateData = async () => {
+        const db = await openDB();
+        const transaction = db.transaction('data', 'readonly');
+        const objectStore = transaction.objectStore('data');
+
+        const schinfo = await objectStore.get('schinfo');
+        const stdnt = await objectStore.get('stdnt');
+        const lastUpdated = await objectStore.get('lastUpdated');
+
+        const currentTime = new Date().getTime();
+        const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+
+        if (!schinfo || !stdnt || !lastUpdated || currentTime - parseInt(lastUpdated.data) >= oneWeekInMilliseconds) {
+            fetchDataFromAPI();
+        }
+    };
+
+    checkAndUpdateData();
+
+
     function scrollToTop() {
         document.getElementById('chatpage').scrollTo({
             top: 0,
@@ -103,30 +169,6 @@
         document.getElementById('searchbar').value = element.innerText.replace(/["→]/g, "").trim();
         // document.getElementById('sendimg').style.opacity = '1'
         // document.getElementById('sendimg').style.cursor = 'pointer'
-    }
-
-    const schinfo = localStorage.getItem('schinfo');
-    const stdnt = localStorage.getItem('stdnt');
-    const lastUpdated = localStorage.getItem('lastUpdated');
-    const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
-
-    if (!schinfo || !stdnt || !lastUpdated || new Date().getTime() - parseInt(lastUpdated) >= oneWeekInMilliseconds) {  //스토리지에 데이터가 없거나 마지막으로 저장한지 일주일이 지났다면
-        axios.get('/.netlify/functions/api')
-            .then(function (response) {
-                const data = response.data;
-                const schinfo = data[0].list;
-                const stdnt = data[1].list;
-                const currentTime = new Date().getTime();
-
-                localStorage.setItem('schinfo', JSON.stringify(schinfo));
-                localStorage.setItem('stdnt', JSON.stringify(stdnt));
-                localStorage.setItem('lastUpdated', currentTime.toString());
-                window.location.reload();
-            })
-            .catch(function (error) {
-                alert('오류가 발생했습니다. 새로고침해주세요.\n' + error)
-                window.location.reload();
-            });
     }
 
     // 지도와 로드뷰를 감싸고 있는 div의 class를 변경하여 지도를 숨기거나 보이게 하는 함수입니다 
