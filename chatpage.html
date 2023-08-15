@@ -122,6 +122,8 @@
                 objectStore.put({ id: 'stdnt', data: stdnt }),
                 objectStore.put({ id: 'lastUpdated', data: currentTime }),
             ]);
+
+            console.log('Data saved to IndexedDB successfully');
             location.reload();
         } catch (error) {
             alert('오류가 발생했습니다. 새로고침해주세요.\n' + error);
@@ -145,7 +147,7 @@
             fetchDataFromAPI();
         }
     };
-    fetchDataFromAPI();
+
     checkAndUpdateData();
 
 

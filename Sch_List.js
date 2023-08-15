@@ -1,4 +1,35 @@
-const All_Info = ''
+let All_Info;
+let Student_number;
+
+const openDBForReading = () => {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('myDatabase', 1);
+
+        request.onerror = (event) => {
+            reject('Failed to open database');
+        };
+
+        request.onsuccess = (event) => {
+            const db = event.target.result;
+            resolve(db);
+        };
+    });
+};
+
+const fetchDataFromDB = async () => {
+    try {
+        const db = await openDBForReading();
+        const transaction = db.transaction('data', 'readonly');
+        const objectStore = transaction.objectStore('data');
+
+        All_Info = await objectStore.get('schinfo');
+        Student_number = await objectStore.get('stdnt');
+
+    } catch (error) {
+        console.error('Error fetching data from IndexedDB:', error);
+    }
+};
+fetchDataFromDB();
 
 /**
  * 
@@ -104,47 +135,6 @@ function filtered_to_Keyword(str) {
 }
 
 function SchList(string) {
-
-    const request = indexedDB.open('myDatabase', 1);
-    request.onsuccess = (event) => {
-        const db = event.target.result;
-
-        // "allinfo" Object Store의 데이터 가져오기
-        const allinfoTransaction = db.transaction(['allinfo'], 'readonly');
-        const allinfoObjectStore = allinfoTransaction.objectStore('allinfo');
-
-        const allinfoGetRequest = allinfoObjectStore.get('allinfo-id');
-
-        allinfoGetRequest.onsuccess = (event) => {
-            const allinfoData = event.target.result;
-            if (allinfoData) {
-                All_Info = allinfoData;
-            } else {
-                console.log("allinfo Data not found");
-            }
-        };
-
-        // "stdnt" Object Store의 데이터 가져오기
-        const stdntTransaction = db.transaction(['stdnt'], 'readonly');
-        const stdntObjectStore = stdntTransaction.objectStore('stdnt');
-
-        const stdntGetRequest = stdntObjectStore.get('stdnt-id');
-
-        stdntGetRequest.onsuccess = (event) => {
-            const stdntData = event.target.result;
-            if (stdntData) {
-                Student_number = stdntData;
-            } else {
-                console.log("stdnt Data not found");
-            }
-        };
-
-        stdntTransaction.oncomplete = () => {
-            db.close();
-        };
-    };
-
-
     var Filtered = stringFilter(string) //예외 처리된 문자열
     var Keyword = filtered_to_Keyword(Filtered) //종류,성별
     var adr = address_Only(Filtered, All_Info)  //주소 리스트
