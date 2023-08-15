@@ -17,8 +17,8 @@
     import { Chat } from "./chatpage.js";
     import { info, student } from "./testData.js";
 
-    localStorage.setItem('schinfo', JSON.stringify(info));
-    localStorage.setItem('stdnt', JSON.stringify(student));
+    // localStorage.setItem('schinfo', JSON.stringify(info));
+    // localStorage.setItem('stdnt', JSON.stringify(student));
 </script>
 
 <body>
@@ -106,31 +106,31 @@
         });
     };
 
-    // const fetchDataFromAPI = async () => {
-    //     try {
-    //         const response = await axios.get('/.netlify/functions/api');
-    //         const data = response.data;
-    //         const schinfo = data[0].list;
-    //         const stdnt = data[1].list;
-    //         const currentTime = new Date().getTime();
+    const fetchDataFromAPI = async () => {
+        try {
+            const response = await axios.get('/.netlify/functions/api');
+            const data = response.data;
+            const schinfo = data[0].list;
+            const stdnt = data[1].list;
+            const currentTime = new Date().getTime();
 
-    //         const db = await openDB();
-    //         const transaction = db.transaction('data', 'readwrite');
-    //         const objectStore = transaction.objectStore('data');
+            const db = await openDB();
+            const transaction = db.transaction('data', 'readwrite');
+            const objectStore = transaction.objectStore('data');
 
-    //         await Promise.all([
-    //             objectStore.put({ id: 'schinfo', data: schinfo }),
-    //             objectStore.put({ id: 'stdnt', data: stdnt }),
-    //             objectStore.put({ id: 'lastUpdated', data: currentTime }),
-    //         ]);
+            await Promise.all([
+                objectStore.put({ id: 'schinfo', data: schinfo }),
+                objectStore.put({ id: 'stdnt', data: stdnt }),
+                objectStore.put({ id: 'lastUpdated', data: currentTime }),
+            ]);
 
-    //         console.log('Data saved to IndexedDB successfully');
-    //         location.reload();
-    //     } catch (error) {
-    //         alert('오류가 발생했습니다. 새로고침해주세요.\n' + error);
-    //         location.reload();
-    //     }
-    // };
+            console.log('Data saved to IndexedDB successfully');
+            location.reload();
+        } catch (error) {
+            alert('오류가 발생했습니다. 새로고침해주세요.\n' + error);
+            location.reload();
+        }
+    };
 
     const checkAndUpdateData = async () => {
         const db = await openDB();

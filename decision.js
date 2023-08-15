@@ -85,7 +85,7 @@ async function Answer(Question) {
                 if (
                     compareStrings(Question, SchInfo(Go)) &&
                     (!listReturn.types_Return && !listReturn.genders_Return ||
-                        listReturn.genders_Return.includes('녀') || listReturn.genders_Return.includes('남'))
+                        listReturn.genders_Return.includes('녀'))
                 ) {
                     if (duplicate.length > 1) {  //학교 이름 중복
 
