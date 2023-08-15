@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>New chat</title>
     <link rel="stylesheet" href="chatpage.css">
+    <link rel="icon" href="search.png">
 
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a5e1249e2f89aba26082905963e3cbc"></script>
@@ -16,8 +17,8 @@
     import { Chat } from "./chatpage.js";
     import { info, student } from "./testData.js";
 
-    // localStorage.setItem('schinfo', JSON.stringify(info));
-    // localStorage.setItem('stdnt', JSON.stringify(student));
+    localStorage.setItem('schinfo', JSON.stringify(info));
+    localStorage.setItem('stdnt', JSON.stringify(student));
 </script>
 
 <body>
@@ -41,7 +42,7 @@
             <div id="exfx">
 
                 <div id="exul" class="hv">
-                    <div id="exicon">icon</div>
+                    <div id="exicon"><img src="ex.png" alt=""></div>
                     <div id="extitle">예시</div>
                     <div id="extxt" onclick="ex(this)">"서울 은평구에 위치한 특성화고<br>를 찾아줘" →</div>
                     <div id="extxt" onclick="ex(this)">"세명컴퓨터고등학교에 대한 정<br>보를 알려줘" →</div>
@@ -49,7 +50,7 @@
                 </div>
 
                 <div id="exul">
-                    <div id="exicon">icon</div>
+                    <div id="exicon"><img src="ability.png" alt=""></div>
                     <div id="extitle">기능</div>
                     <div id="extxt">고등학교의 위치와 종류로 찾을<br>수 있습니다.</div>
                     <div id="extxt">고등학교 위치가 표시된 지도<br>및 로드뷰를 제공합니다.</div>
@@ -57,7 +58,7 @@
                 </div>
 
                 <div id="exul">
-                    <div id="exicon">icon</div>
+                    <div id="exicon"><img src="warning.png" alt=""></div>
                     <div id="extitle">주의</div>
                     <div id="extxt">매년 6월에 새로운 학교 정보가 <br>갱신됩니다.</div>
                     <div id="extxt">질문 시 행정구역 (시, 구, 동 ...)<br>을 붙여주세요.</div>
@@ -105,31 +106,31 @@
         });
     };
 
-    const fetchDataFromAPI = async () => {
-        try {
-            const response = await axios.get('/.netlify/functions/api');
-            const data = response.data;
-            const schinfo = data[0].list;
-            const stdnt = data[1].list;
-            const currentTime = new Date().getTime();
+    // const fetchDataFromAPI = async () => {
+    //     try {
+    //         const response = await axios.get('/.netlify/functions/api');
+    //         const data = response.data;
+    //         const schinfo = data[0].list;
+    //         const stdnt = data[1].list;
+    //         const currentTime = new Date().getTime();
 
-            const db = await openDB();
-            const transaction = db.transaction('data', 'readwrite');
-            const objectStore = transaction.objectStore('data');
+    //         const db = await openDB();
+    //         const transaction = db.transaction('data', 'readwrite');
+    //         const objectStore = transaction.objectStore('data');
 
-            await Promise.all([
-                objectStore.put({ id: 'schinfo', data: schinfo }),
-                objectStore.put({ id: 'stdnt', data: stdnt }),
-                objectStore.put({ id: 'lastUpdated', data: currentTime }),
-            ]);
+    //         await Promise.all([
+    //             objectStore.put({ id: 'schinfo', data: schinfo }),
+    //             objectStore.put({ id: 'stdnt', data: stdnt }),
+    //             objectStore.put({ id: 'lastUpdated', data: currentTime }),
+    //         ]);
 
-            console.log('Data saved to IndexedDB successfully');
-            location.reload();
-        } catch (error) {
-            alert('오류가 발생했습니다. 새로고침해주세요.\n' + error);
-            location.reload();
-        }
-    };
+    //         console.log('Data saved to IndexedDB successfully');
+    //         location.reload();
+    //     } catch (error) {
+    //         alert('오류가 발생했습니다. 새로고침해주세요.\n' + error);
+    //         location.reload();
+    //     }
+    // };
 
     const checkAndUpdateData = async () => {
         const db = await openDB();
