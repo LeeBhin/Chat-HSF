@@ -82,7 +82,7 @@ async function Answer(Question) {
                 const Go = Question.split('고')[0] + '고';  //'고'까지의 문자열
                 var duplicate = printDuplicates(SchInfo(Go));
 
-                if (compareStrings(Question, SchInfo(Go)) && !listReturn.types_Return) {
+                if (compareStrings(Question, SchInfo(Go)) && !listReturn.types_Return && !Question.includes('있는') && !Question.includes('위치') && !Question.includes('소재')) {
 
                     if (duplicate.length > 1) {  //학교 이름 중복
 
