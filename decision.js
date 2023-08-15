@@ -1,9 +1,6 @@
 import { SchInfo, info_Print, printDuplicates, info_PrintC } from "./Sch_Info.js";
 import { SchList } from "./Sch_List.js";
 
-const allinfo = localStorage.getItem('schinfo');
-// const All_Info = JSON.parse(allinfo)
-
 var ifDuplicate = false;
 
 function Answer(Question) {
