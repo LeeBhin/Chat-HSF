@@ -3,7 +3,10 @@ import { SchList } from "./Sch_List.js";
 
 var ifDuplicate = false;
 
-const openDB = () => {
+var All_Info;
+var Student_number;
+
+const openDBForReading = () => {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('myDatabase', 1);
 
@@ -15,32 +18,36 @@ const openDB = () => {
             const db = event.target.result;
             resolve(db);
         };
-
-        request.onupgradeneeded = (event) => {
-            const db = event.target.result;
-            if (!db.objectStoreNames.contains('data')) {
-                const objectStore = db.createObjectStore('data', { keyPath: 'id' });
-            }
-        };
     });
 };
 
 const fetchDataFromDB = async () => {
     try {
-        const db = await openDB();
+        const db = await openDBForReading();
         const transaction = db.transaction('data', 'readonly');
         const objectStore = transaction.objectStore('data');
 
-        const schinfo = await objectStore.get('schinfo').result;
-        const stdnt = await objectStore.get('stdnt').result;
+        const schInfoRequest = objectStore.get('schinfo');
+        const stdntRequest = objectStore.get('stdnt');
 
-        // 이제 schinfo와 stdnt 데이터를 사용할 수 있습니다.
-        // 예를 들어 console.log(schinfo)로 데이터 확인 가능
-        return { schinfo, stdnt };
+        schInfoRequest.onsuccess = (event) => {
+            const result = event.target.result;
+            if (result) {
+                All_Info = result.data;
+            }
+        };
+
+        stdntRequest.onsuccess = (event) => {
+            const result = event.target.result;
+            if (result) {
+                Student_number = result.data;
+            }
+        };
     } catch (error) {
         console.error('Error fetching data from IndexedDB:', error);
     }
 };
+
 
 async function Answer(Question) {
     if (Question == '!업데이트') {
@@ -54,12 +61,9 @@ async function Answer(Question) {
 
         window.location.reload();
     }
+    fetchDataFromDB();
 
-    const data = await fetchDataFromDB();
-    const schinfo = data.schinfo.data;
-    const stdnt = data.stdnt.data;
-
-    if (!schinfo || !stdnt) {
+    if (!All_Info || !Student_number) {
         return '데이터 로딩중입니다... 잠시만 기다려주세요!\n(데이터 갱신 주기 : 일주일)';
     } else {
         try {
