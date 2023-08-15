@@ -47,7 +47,7 @@ const fetchDataFromDB = async () => {
         console.error('Error fetching data from IndexedDB:', error);
     }
 };
-
+fetchDataFromDB();
 
 async function Answer(Question) {
     if (Question == '!업데이트') {
@@ -61,7 +61,6 @@ async function Answer(Question) {
 
         window.location.reload();
     }
-    fetchDataFromDB();
 
     if (!All_Info || !Student_number) {
         return '데이터 로딩중입니다... 잠시만 기다려주세요!\n(데이터 갱신 주기 : 일주일)';

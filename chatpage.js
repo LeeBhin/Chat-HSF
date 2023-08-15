@@ -43,6 +43,7 @@ function send(question) {
 
 // 대화창에 채팅 추가 함수
 function Chat(who, chatVal) {
+    console.log(chatVal)
 
     var chatsValue = document.createElement('div');
     chatsValue.id = 'chatsValue';
