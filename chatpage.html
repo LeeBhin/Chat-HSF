@@ -139,6 +139,7 @@
         const schinfo = await objectStore.get('schinfo');
         const stdnt = await objectStore.get('stdnt');
         const lastUpdated = await objectStore.get('lastUpdated');
+        console.log(await objectStore.get('schinfo'))
 
         const currentTime = new Date().getTime();
         const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
