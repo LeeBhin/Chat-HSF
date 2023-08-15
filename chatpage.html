@@ -144,9 +144,10 @@
         const currentTime = new Date().getTime();
         const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
 
-        if (!schinfo || !stdnt || !lastUpdated || currentTime - parseInt(lastUpdated.data) >= oneWeekInMilliseconds) {
+        if (schinfo === undefined || stdnt === undefined || lastUpdated === undefined || currentTime - parseInt(lastUpdated.data) >= oneWeekInMilliseconds) {
             fetchDataFromAPI();
         }
+
     };
 
     checkAndUpdateData();
