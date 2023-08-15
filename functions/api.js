@@ -1,6 +1,6 @@
 const axios = require('axios');
 const https = require('https');
-const zlib = require('zlib');
+const zlib = require('zlib'); // Gzip 압축을 위한 zlib 라이브러리
 
 exports.handler = async function (event, context, callback) {
   try {
@@ -19,22 +19,16 @@ exports.handler = async function (event, context, callback) {
           });
 
           if (response.data.resultCode === 'fail') {
+            // 작년 연도로 업데이트
             const lastYear = (currentYear - 1).toString();
             const updatedUrl = url.replace(currentYear, lastYear);
 
             const updatedResponse = await axios.get(updatedUrl, {
               httpsAgent: new https.Agent({ rejectUnauthorized: false })
             });
-            
-            // Brotli 압축 적용
-            const compressedData = zlib.brotliCompressSync(Buffer.from(JSON.stringify(updatedResponse.data)));
-
-            return compressedData;
+            return updatedResponse.data;
           } else {
-            // Brotli 압축 적용
-            const compressedData = zlib.brotliCompressSync(Buffer.from(JSON.stringify(response.data)));
-
-            return compressedData;
+            return response.data;
           }
         } catch (error) {
           console.error('Failed to fetch data:', error);
@@ -43,14 +37,17 @@ exports.handler = async function (event, context, callback) {
       })
     );
 
+    // Gzip 압축 적용
+    const compressedData = zlib.gzipSync(JSON.stringify(responses));
+
     callback(null, {
       statusCode: 200,
       headers: {
-        'Content-Encoding': 'br', // Brotli 압축된 데이터를 사용하도록 설정
+        'Content-Encoding': 'gzip', // Gzip 압축된 데이터를 사용하도록 설정
         'Access-Control-Allow-Origin': '*', // 또는 특정 도메인
         'Access-Control-Allow-Headers': 'Content-Type',
       },
-      body: responses
+      body: compressedData
     });
   } catch (error) {
     console.error('Failed to fetch data:', error);
