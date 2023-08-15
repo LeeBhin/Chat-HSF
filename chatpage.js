@@ -92,70 +92,68 @@ function Chat(who, chatVal) {
 
 // 한 글자씩 출력하는 함수 (주소 클릭 시 새 탭에서 열리는 버전)
 function printOneByOne(text, chatsValue) {
-    var result1
+    text.then(result => {
+        console.log(result)
+        text = result
 
-    text.then(result =>{
-        result1 = result
-    })
-    console.log(result1)
+        var index = 0;
+        var interval = 2; // 출력 간격(ms)
 
-    var index = 0;
-    var interval = 2; // 출력 간격(ms)
+        function addNextCharacter() {
+            if (index < text.length) {
+                var char = text.charAt(index);
 
-    function addNextCharacter() {
-        if (index < result.length) {
-            var char = result1.charAt(index);
+                if (char === '㉾') {
 
-            if (char === '㉾') {
-
-                var url = "";
-                var urlEndIndex = result1.indexOf('㉾', index + 1);
-                if (urlEndIndex !== -1) {
-                    url = result1.substring(index + 1, urlEndIndex);
-                    var link = document.createElement('a');
-                    link.href = url;
-                    link.target = "_blank"; // 새 탭에서 열리도록 설정
-                    link.innerresult1 = url;
-                    chatsValue.appendChild(link);
-                    index = urlEndIndex + 1;
+                    var url = "";
+                    var urlEndIndex = text.indexOf('㉾', index + 1);
+                    if (urlEndIndex !== -1) {
+                        url = text.substring(index + 1, urlEndIndex);
+                        var link = document.createElement('a');
+                        link.href = url;
+                        link.target = "_blank"; // 새 탭에서 열리도록 설정
+                        link.innerText = url;
+                        chatsValue.appendChild(link);
+                        index = urlEndIndex + 1;
+                    } else {
+                        chatsValue.innerHTML += char;
+                        index++;
+                    }
                 } else {
-                    chatsValue.innerHTML += char;
+                    if (char === '\n') {
+                        chatsValue.innerHTML += '<br>';
+                    } else {
+                        chatsValue.innerHTML += char;
+                    }
                     index++;
                 }
-            } else {
-                if (char === '\n') {
-                    chatsValue.innerHTML += '<br>';
-                } else {
-                    chatsValue.innerHTML += char;
-                }
-                index++;
+
+                setTimeout(addNextCharacter, interval);
             }
 
-            setTimeout(addNextCharacter, interval);
-        }
-
-        var chatpage = document.getElementById('chatpage');
-        chatpage.scrollTo({ top: chatpage.scrollHeight, behavior: 'smooth' });
-    }
-
-    addNextCharacter();
-
-    if (document.getElementById('answertype').innerText == 'info') {
-        var w, g
-        setTimeout(() => {
-            var wandg = findCode(document.getElementById('code').innerText)
-            w = wandg[0].LTTUD
-            g = wandg[0].LGTUD
-
-            console.log(w + '\n' + g)
-        }, 10);
-
-        setTimeout(() => {
-            drawMap(w, g)
             var chatpage = document.getElementById('chatpage');
             chatpage.scrollTo({ top: chatpage.scrollHeight, behavior: 'smooth' });
-        }, result1.length * 5);
-    }
+        }
+
+        addNextCharacter();
+
+        if (document.getElementById('answertype').innerText == 'info') {
+            var w, g
+            setTimeout(() => {
+                var wandg = findCode(document.getElementById('code').innerText)
+                w = wandg[0].LTTUD
+                g = wandg[0].LGTUD
+
+                console.log(w + '\n' + g)
+            }, 10);
+
+            setTimeout(() => {
+                drawMap(w, g)
+                var chatpage = document.getElementById('chatpage');
+                chatpage.scrollTo({ top: chatpage.scrollHeight, behavior: 'smooth' });
+            }, text.length * 5);
+        }
+    })
 }
 
 function drawMap(w, g) {
