@@ -22,16 +22,29 @@ const fetchDataFromDB = async () => {
         const transaction = db.transaction('data', 'readonly');
         const objectStore = transaction.objectStore('data');
 
-        All_Info = await objectStore.get('schinfo').data;
-        console.log(await objectStore.get('schinfo'))
-        console.log(await objectStore.get('schinfo').result)
-        console.log(await objectStore.get('schinfo').result.data)
-        Student_number = await objectStore.get('stdnt').data;
+        const schInfoRequest = objectStore.get('schinfo');
+        const stdntRequest = objectStore.get('stdnt');
 
+        schInfoRequest.onsuccess = (event) => {
+            const result = event.target.result;
+            if (result) {
+                All_Info = result.data;
+                console.log(All_Info)
+            }
+        };
+
+        stdntRequest.onsuccess = (event) => {
+            const result = event.target.result;
+            if (result) {
+                Student_number = result.data;
+                console.log(Student_number)
+            }
+        };
     } catch (error) {
         console.error('Error fetching data from IndexedDB:', error);
     }
 };
+
 fetchDataFromDB();
 
 
