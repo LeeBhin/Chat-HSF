@@ -136,18 +136,32 @@
         const transaction = db.transaction('data', 'readonly');
         const objectStore = transaction.objectStore('data');
 
-        const schinfo = await objectStore.get('schinfo');
-        const stdnt = await objectStore.get('stdnt');
-        const lastUpdated = await objectStore.get('lastUpdated');
-        console.log(await objectStore.get('schinfo'))
+        const schinfoRequest = objectStore.get('schinfo');
+        schinfoRequest.onsuccess = (event) => {
+            const schinfo = event.target.result;
 
-        const currentTime = new Date().getTime();
-        const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+            const stdntRequest = objectStore.get('stdnt');
+            stdntRequest.onsuccess = (event) => {
+                const stdnt = event.target.result;
 
-        if (schinfo === undefined || stdnt === undefined || lastUpdated === undefined || currentTime - parseInt(lastUpdated.data) >= oneWeekInMilliseconds) {
-            fetchDataFromAPI();
-        }
+                const lastUpdatedRequest = objectStore.get('lastUpdated');
+                lastUpdatedRequest.onsuccess = (event) => {
+                    const lastUpdated = event.target.result;
 
+                    const currentTime = new Date().getTime();
+                    const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+
+                    if (
+                        schinfo === undefined ||
+                        stdnt === undefined ||
+                        lastUpdated === undefined ||
+                        currentTime - parseInt(lastUpdated.data) >= oneWeekInMilliseconds
+                    ) {
+                        fetchDataFromAPI();
+                    }
+                };
+            };
+        };
     };
 
     checkAndUpdateData();
