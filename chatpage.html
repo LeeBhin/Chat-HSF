@@ -24,7 +24,7 @@
     <div id="up" class="updn" onclick="scrollToTop()">↑</div>
     <div id="down" class="updn" onclick="scrollToBottom()">↓</div>
     <header>
-        <button id="apiReload" onclick="localStorage.clear(); window.location.reload();">
+        <button id="apiReload" onclick="apiupdate(); window.location.reload();">
             <span>♻️ &nbsp; 정보 갱신</span>
         </button>
 
@@ -201,6 +201,18 @@
                 container.className = "view_roadview"; // 로드뷰가 보이도록 클래스 변경
             }
         }
+    }
+
+    async function apiupdate() {
+        const db = await openDB();
+        const transaction = db.transaction('data', 'readwrite');
+        const objectStore = transaction.objectStore('data');
+
+        objectStore.delete('schinfo');
+        objectStore.delete('stdnt');
+        objectStore.delete('lastUpdated');
+
+        window.location.reload();
     }
 
 </script>
