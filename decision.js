@@ -97,6 +97,9 @@ async function Answer(Question) {
                         document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt">
                             <span> 🏫&nbsp; `+ SchInfo(Go) + `</span>
                         </button>`);
+
+                        console.log(info_Print(SchInfo(Go)))
+                        console.log((SchInfo(Go)))
                         return info_Print(SchInfo(Go))
                     }
 
