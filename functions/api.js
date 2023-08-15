@@ -1,6 +1,5 @@
 const axios = require('axios');
 const https = require('https');
-const zlib = require('zlib'); // Gzip 압축을 위한 zlib 라이브러리
 
 exports.handler = async function (event, context, callback) {
   try {
@@ -37,17 +36,9 @@ exports.handler = async function (event, context, callback) {
       })
     );
 
-    // Gzip 압축 적용
-    const compressedData = zlib.gzipSync(JSON.stringify(responses));
-
     callback(null, {
       statusCode: 200,
-      headers: {
-        'Content-Encoding': 'gzip', // Gzip 압축된 데이터를 사용하도록 설정
-        'Access-Control-Allow-Origin': '*', // 또는 특정 도메인
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-      body: compressedData
+      body: JSON.stringify(responses)
     });
   } catch (error) {
     console.error('Failed to fetch data:', error);
