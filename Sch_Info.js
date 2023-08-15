@@ -24,6 +24,8 @@ const fetchDataFromDB = async () => {
 
         All_Info = await objectStore.get('schinfo');
         Student_number = await objectStore.get('stdnt');
+        console.log(All_Info)
+        console.log(Student_number)
 
     } catch (error) {
         console.error('Error fetching data from IndexedDB:', error);
@@ -54,6 +56,9 @@ function StdntC(SchoolCode) {
 
 // 문자열 비교하여 가장 유사한 항목 찾는 함수 (Levenshtein distance X)
 function SchInfo(inputString) {
+
+    fetchDataFromDB();
+
     if (inputString.length < 3) {
         return 0;
     }
