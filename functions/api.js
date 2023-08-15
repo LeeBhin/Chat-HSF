@@ -38,6 +38,10 @@ exports.handler = async function (event, context, callback) {
 
     callback(null, {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // 또는 특정 도메인
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
       body: JSON.stringify(responses)
     });
   } catch (error) {
