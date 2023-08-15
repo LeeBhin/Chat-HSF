@@ -56,8 +56,8 @@ async function Answer(Question) {
     }
 
     const data = await fetchDataFromDB();
-    const schinfo = JSON.parse(data.schinfo.data);
-    const stdnt = JSON.parse(data.stdnt.data);
+    const schinfo = data.schinfo.data;
+    const stdnt = data.stdnt.data;
 
     if (!schinfo || !stdnt) {
         return '데이터 로딩중입니다... 잠시만 기다려주세요!\n(데이터 갱신 주기 : 일주일)';
