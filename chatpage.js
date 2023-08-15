@@ -92,7 +92,7 @@ function Chat(who, chatVal) {
 
 // 한 글자씩 출력하는 함수 (주소 클릭 시 새 탭에서 열리는 버전)
 function printOneByOne(text, chatsValue) {
-    console.log(chatsValue)
+    console.log(text)
 
     var index = 0;
     var interval = 2; // 출력 간격(ms)
