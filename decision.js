@@ -31,8 +31,8 @@ const fetchDataFromDB = async () => {
         const transaction = db.transaction('data', 'readonly');
         const objectStore = transaction.objectStore('data');
 
-        const schinfo = await objectStore.get('schinfo');
-        const stdnt = await objectStore.get('stdnt');
+        const schinfo = await objectStore.get('schinfo').result;
+        const stdnt = await objectStore.get('stdnt').result;
 
         // 이제 schinfo와 stdnt 데이터를 사용할 수 있습니다.
         // 예를 들어 console.log(schinfo)로 데이터 확인 가능
