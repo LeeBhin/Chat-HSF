@@ -29,7 +29,6 @@ const fetchDataFromDB = async () => {
             const result = event.target.result;
             if (result) {
                 All_Info = result.data;
-                console.log(All_Info)
             }
         };
 
@@ -37,7 +36,6 @@ const fetchDataFromDB = async () => {
             const result = event.target.result;
             if (result) {
                 Student_number = result.data;
-                console.log(Student_number)
             }
         };
     } catch (error) {

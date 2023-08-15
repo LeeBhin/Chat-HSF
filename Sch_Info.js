@@ -30,6 +30,7 @@ const fetchDataFromDB = async () => {
             if (result) {
                 All_Info = result.data;
                 console.log(All_Info)
+                console.log(typeof(All_Info))
             }
         };
 
