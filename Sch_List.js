@@ -22,8 +22,8 @@ const fetchDataFromDB = async () => {
         const transaction = db.transaction('data', 'readonly');
         const objectStore = transaction.objectStore('data');
 
-        All_Info = await objectStore.get('schinfo');
-        Student_number = await objectStore.get('stdnt');
+        All_Info = await objectStore.get('schinfo').data;
+        Student_number = await objectStore.get('stdnt').data;
 
     } catch (error) {
         console.error('Error fetching data from IndexedDB:', error);
