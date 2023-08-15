@@ -24,8 +24,8 @@ const fetchDataFromDB = async () => {
 
         All_Info = await objectStore.get('schinfo').data;
         console.log(await objectStore.get('schinfo'))
-        console.log(await objectStore.get('schinfo').data)
         console.log(await objectStore.get('schinfo').result)
+        console.log(await objectStore.get('schinfo').result.data)
         Student_number = await objectStore.get('stdnt').data;
 
     } catch (error) {
