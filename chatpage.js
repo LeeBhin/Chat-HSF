@@ -92,30 +92,30 @@ function Chat(who, chatVal) {
 
 // 한 글자씩 출력하는 함수 (주소 클릭 시 새 탭에서 열리는 버전)
 function printOneByOne(text, chatsValue) {
-    console.log(text)
-    
+    var result1
+
     text.then(result =>{
-        console.log(result)
-        text = result
+        result1 = result
     })
+    console.log(result1)
 
     var index = 0;
     var interval = 2; // 출력 간격(ms)
 
     function addNextCharacter() {
-        if (index < text.length) {
-            var char = text.charAt(index);
+        if (index < result.length) {
+            var char = result1.charAt(index);
 
             if (char === '㉾') {
 
                 var url = "";
-                var urlEndIndex = text.indexOf('㉾', index + 1);
+                var urlEndIndex = result1.indexOf('㉾', index + 1);
                 if (urlEndIndex !== -1) {
-                    url = text.substring(index + 1, urlEndIndex);
+                    url = result1.substring(index + 1, urlEndIndex);
                     var link = document.createElement('a');
                     link.href = url;
                     link.target = "_blank"; // 새 탭에서 열리도록 설정
-                    link.innerText = url;
+                    link.innerresult1 = url;
                     chatsValue.appendChild(link);
                     index = urlEndIndex + 1;
                 } else {
@@ -154,7 +154,7 @@ function printOneByOne(text, chatsValue) {
             drawMap(w, g)
             var chatpage = document.getElementById('chatpage');
             chatpage.scrollTo({ top: chatpage.scrollHeight, behavior: 'smooth' });
-        }, text.length * 5);
+        }, result1.length * 5);
     }
 }
 
