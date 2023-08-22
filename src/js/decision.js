@@ -74,7 +74,7 @@ async function Answer(Question) {
                 ifDuplicate = false;
 
                 document.getElementById('answertype').innerText = 'info'
-                document.getElementById('mbheader').innerText = 'info'
+                document.getElementById('mbheader').innerText = SchInfo(Go)
                 return info_PrintC(code)
             } else if (!ifDuplicate) {
                 var listReturn = SchList(Question);
@@ -93,7 +93,7 @@ async function Answer(Question) {
 
                     } else {
                         document.getElementById('answertype').innerText = 'info'
-                        document.getElementById('mbheader').innerText = 'info'
+                        document.getElementById('mbheader').innerText = SchInfo(Go)
                         document.title = SchInfo(Go)
                         document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt">
                             <span> 🏫&nbsp; `+ SchInfo(Go) + `</span>
