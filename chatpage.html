@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New chat</title>
     <link rel="stylesheet" href="src/css/chatpage.css">
     <link rel="icon" href="src/images/search.png">
@@ -27,6 +27,18 @@
     </header>
 
     <div id="chatpage">
+        <div id="mbblck"
+            style="width: 100%; height: 100%; position: absolute; background-color: rgba(35, 35, 56, 0.418); z-index: 100; display: none; ">
+        </div>
+        <div id="mbheader">
+            <img src="src/images/hmbgr.png" alt="" id="hbgbtn"
+                style="width: 25px; position: absolute; left: 10px; top: 13px; cursor: pointer; z-index: 1000;">
+            <img src="src/images/xbtn.png" alt="" id="xbtn"
+                style="width: 25px; position: absolute; left: 10px; top: 13px; cursor: pointer; display: none;">
+            New chat
+        </div>
+
+
         <div id="ex">
             <h1 id="title">ChatHSF</h1>
 
@@ -204,6 +216,39 @@
 
         window.location.reload();
     }
+
+    const header = document.querySelector('header');
+    const toggleButton = document.getElementById('hbgbtn');
+    const xbtn = document.getElementById('xbtn')
+    let isOpen = false;
+
+    toggleButton.addEventListener('click', () => {
+        if (isOpen) {
+
+        } else {
+            header.style.transform = 'translateX(0)';
+            toggleButton.style.transform = 'translateX(1030%)';
+            xbtn.style.display = 'block';
+            xbtn.style.zIndex = '100000';
+            toggleButton.style.display = 'none';
+            document.getElementById('mbblck').style.display = 'block';
+            setTimeout(() => {
+                xbtn.style.transform = 'translateX(1030%)';
+            }, 10);
+        }
+        isOpen = !isOpen;
+    });
+
+    xbtn.addEventListener('click', () => {
+        isOpen = !isOpen;
+        header.style.transform = 'translateX(-100%)';
+        toggleButton.style.transform = 'translateX(0)';
+        setTimeout(() => {
+            xbtn.style.display = 'none';
+        }, 10);
+        toggleButton.style.display = 'block';
+        document.getElementById('mbblck').style.display = 'none';
+    })
 
 </script>
 

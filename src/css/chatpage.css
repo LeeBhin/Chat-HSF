@@ -48,7 +48,7 @@ header {
     border-radius: 20px;
     border: solid 1px rgb(207, 207, 207);
     position: fixed;
-    z-index: 100000;
+    z-index: 100;
     right: 100px;
     cursor: pointer;
     text-align: center;
@@ -58,7 +58,7 @@ header {
     transition: .3s;
 }
 
-.updn:hover{
+.updn:hover {
     background-color: #e7e7e7;
 }
 
@@ -175,7 +175,7 @@ header>button>span {
     padding-bottom: 270px;
 }
 
-#exicon img{
+#exicon img {
     width: 30px;
 }
 
@@ -198,7 +198,7 @@ input:focus {
     top: 91.5%;
     left: 50%;
     transform: translate(-33.5%, -50%);
-    z-index: 100;
+    z-index: 50;
 }
 
 .searchbar::placeholder {
@@ -227,6 +227,79 @@ input:focus {
     width: 700px;
     text-align: start;
     float: left;
+}
+
+#mbheader {
+    width: 100%;
+    height: 45px;
+    background-color: #343541;
+    color: #d9d9e3;
+    line-height: 45px;
+    text-align: center;
+    display: none;
+    position: relative;
+}
+
+@media screen and (max-width: 1279px) {
+    #chatsValue {
+        width: 500px;
+    }
+
+    .searchbar {
+        width: 620px;
+        margin-left: 40px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    #chatsValue {
+        width: 50vw;
+    }
+
+    .searchbar {
+        width: 58vw;
+        margin-left: 75px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #chatsValue {
+        width: 78vw;
+    }
+
+    #hbgbtn {
+        transition: .2s;
+    }
+
+    #xbtn {
+        transition: .2s;
+    }
+
+    header {
+        transform: translateX(-100%);
+        position: absolute;
+        transition: .2s;
+        z-index: 1000;
+    }
+
+    .searchbar {
+        left: 50%;
+        right: 50%;
+        transform: translate(-31%);
+        width: 80vw;
+    }
+
+    .updn {
+        right: 30px;
+    }
+
+    #mbheader {
+        display: block;
+    }
+
+    #title {
+        margin-top: -90px;
+    }
 }
 
 #Icon {
