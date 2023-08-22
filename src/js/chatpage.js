@@ -59,13 +59,13 @@ function Chat(who, chatVal) {
     chatsWrap.id = 'chatsWrap';
 
     var icon = document.createElement('img');
-    icon.src = './search.png';
+    icon.src = './src/images/search.png';
     icon.id = 'Icon';
 
     if (who === 'me') {
         // 내 채팅일 때 아이콘 변경
         chats.id = 'myChat';
-        icon.src = './me.png';
+        icon.src = './src/images/me.png';
 
         chatsValue.innerHTML = chatVal
     } else {
