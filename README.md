@@ -1,7 +1,7 @@
 # Chat-HSF
 
 ### URL
-https://hsf-chat.netlify.app/
+https://chat-hsf.netlify.app/
 
 ### Functions
 1. 이름으로 학교 검색(줄임말 가능)   
