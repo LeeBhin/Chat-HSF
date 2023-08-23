@@ -105,10 +105,15 @@ async function Answer(Question) {
                     }
 
                 } else if (!compareStrings(Question, SchInfo(Go))) {
-                    return '죄송하지만 찾을 수가 없네요.'
+                    return '학교를 찾을 수 없어요.'
                 } else {
                     document.getElementById('answertype').innerText = 'list'
-                    return listReturn.List;
+                    if (listReturn.List === "") {
+                        return '조건에 해당하는 학교를 찾을 수 없습니다.'
+                    }
+                    else {
+                        return listReturn.List;
+                    }
                 }
             }
 
