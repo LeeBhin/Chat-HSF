@@ -93,7 +93,6 @@ function Chat(who, chatVal) {
 // 한 글자씩 출력하는 함수 (주소 클릭 시 새 탭에서 열리는 버전)
 function printOneByOne(text, chatsValue) {
     text.then(result => {
-        console.log(result)
         text = result
 
         var index = 0;
@@ -143,8 +142,6 @@ function printOneByOne(text, chatsValue) {
                 var wandg = findCode(document.getElementById('code').innerText)
                 w = wandg[0].LTTUD
                 g = wandg[0].LGTUD
-
-                console.log(w + '\n' + g)
             }, 10);
 
             setTimeout(() => {

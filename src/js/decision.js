@@ -79,7 +79,6 @@ async function Answer(Question) {
             } else if (!ifDuplicate) {
                 var listReturn = SchList(Question);
 
-                console.log(listReturn)
                 const Go = Question.split('고')[0] + '고';  //'고'까지의 문자열
                 var duplicate = printDuplicates(SchInfo(Go));
 
@@ -98,9 +97,7 @@ async function Answer(Question) {
                         document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt">
                             <span> 🏫&nbsp; `+ SchInfo(Go) + `</span>
                         </button>`);
-
-                        console.log(info_Print(SchInfo(Go)))
-                        console.log((SchInfo(Go)))
+                        
                         return info_Print(SchInfo(Go))
                     }
 
@@ -143,7 +140,6 @@ function Duplicates(data) {
     const schulRdnas = data.map(item => item.SCHUL_RDNDA);
 
     schulCodes = data.map(item => item.SCHUL_CODE);
-    console.log(schulCodes)
     return schulRdnas;
 }
 
