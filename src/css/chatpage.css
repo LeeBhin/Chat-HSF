@@ -32,7 +32,7 @@ body {
 header {
     width: 245px;
     height: 100vh;
-    background-color: #202123;
+    background-color: #f9f9f9;
     display: flex;
     justify-content: center;
     padding: 8px;
@@ -55,7 +55,7 @@ header {
     line-height: 20px;
     font-size: 13px;
     font-weight: bold;
-    transition: .3s;
+    transition: .1s;
 }
 
 .updn:hover {
@@ -108,10 +108,10 @@ header {
     height: 45px;
     background: none;
     cursor: pointer;
-    border: 1px solid #e2e2e742;
-    color: white;
+    border: none;
+    color: rgb(8, 8, 8);
     border-radius: 7px;
-    transition-duration: .2s;
+    transition-duration: .1s;
     position: relative;
     z-index: 1;
 }
@@ -130,12 +130,23 @@ header>button>span {
 #chatpage {
     text-align: center;
     position: relative;
-    height: 900px;
+    height: 100vh;
     overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: hidden;
 }
 
 #exul {
     display: inline-block;
+}
+
+#exul p {
+    font-size: 13px;
+    margin-top: 3px;
+    color: gray;
 }
 
 #extitle {
@@ -146,33 +157,52 @@ header>button>span {
 }
 
 #title {
-    padding-top: 150px;
-    padding-bottom: 60px;
     color: #343541;
-    font-size: 35px;
-    font-family: 'hy견고딕';
+    font-size: 25px;
+    font-family: '고딕';
+    margin-bottom: 10rem;
+}
+
+#ex {
+    width: 700px;
+    margin-bottom: 6rem;
+}
+
+.exlogo {
+    width: 50px;
+    margin: .5rem;
 }
 
 #extxt {
-    background-color: #f7f7f8;
     border-radius: 10px;
     padding: 13px;
     font-size: 14px;
-    margin-bottom: 12px;
-    margin-right: 12px;
-    transition-duration: .3s;
+    transition: .1s;
+    width: 315px;
+    border: solid 1px #e3e3e3;
+    text-align: start;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.hv>#extxt:hover {
-    background-color: #d9d9e38a;
+.mb {
+    margin-bottom: 10px;
+}
+
+#extxt:hover {
+    background-color: rgb(247, 247, 247);
     cursor: pointer;
 }
 
 #exfx {
     display: flex;
-    justify-content: center;
+    position: absolute;
+    width: 700px;
+    bottom: 6rem;
     align-items: center;
-    padding-bottom: 270px;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 #exicon img {
@@ -180,12 +210,12 @@ header>button>span {
 }
 
 .searchbar {
-    width: 740px;
+    width: 700px;
     padding: 15px;
     height: 25px;
     border-radius: 13px;
-    border: solid #d9d9e3 1px;
-    box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.24);
+    border: solid #e3e3e3 0.5px;
+    border-width: 1px;
     font-size: 15px;
 }
 
@@ -195,9 +225,7 @@ input:focus {
 
 #search {
     position: fixed;
-    top: 91.5%;
-    left: 50%;
-    transform: translate(-33.5%, -50%);
+    bottom: 3%;
     z-index: 50;
 }
 
@@ -207,6 +235,7 @@ input:focus {
 }
 
 .Chat {
+    width: 100%;
     border-bottom: #d9d9e3 solid 1px;
     padding: 25px;
     display: flex;
@@ -232,12 +261,11 @@ input:focus {
 #mbheader {
     width: 100%;
     height: 45px;
-    background-color: #343541;
-    color: #d9d9e3;
     line-height: 45px;
     text-align: center;
     display: none;
-    position: relative;
+    position: absolute;
+    top: 0;
 }
 
 @media screen and (max-width: 1279px) {
@@ -245,9 +273,17 @@ input:focus {
         width: 500px;
     }
 
-    .searchbar {
-        width: 620px;
-        margin-left: 40px;
+    .searchbar,
+    #ex {
+        width: 630px;
+    }
+
+    #extxt {
+        width: 280px;
+    }
+
+    #exfx {
+        width: 630px;
     }
 }
 
@@ -258,7 +294,31 @@ input:focus {
 
     .searchbar {
         width: 58vw;
-        margin-left: 75px;
+    }
+
+    #ex {
+        width: 60vw;
+    }
+
+    #exfx {
+        width: 61vw;
+    }
+
+    #extxt {
+        width: 27vw;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    header {
+        transform: translateX(0) !important;
+        /* 화면이 넓을 때 header 항상 표시 */
+    }
+
+    #mbheader,
+    #mbblck {
+        display: none !important;
+        /* 모바일 메뉴 관련 요소 숨김 */
     }
 }
 
@@ -268,24 +328,54 @@ input:focus {
     }
 
     #hbgbtn {
-        transition: .2s;
+        transition: .1s;
     }
 
     #xbtn {
-        transition: .2s;
+        transition: .1s;
+    }
+
+    #ex {
+        width: 80vw;
+    }
+
+    #exfx {
+        width: 80vw;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+
+    .exlogo {
+        width: 40px;
+    }
+
+    #title {
+        font-size: 20px;
+    }
+
+    #exul {
+        width: 100%;
+        /* 전체 너비 사용 */
+        text-align: center;
+        /* 텍스트 중앙 정렬 */
+    }
+
+    #extxt {
+        width: 76vw;
+        /* 뷰포트 너비에 맞춰 조정 */
+        margin-bottom: 10px;
+        /* 요소 간 간격 추가 */
     }
 
     header {
         transform: translateX(-100%);
         position: absolute;
-        transition: .2s;
+        transition: .1s;
         z-index: 1000;
     }
 
     .searchbar {
-        left: 50%;
-        right: 50%;
-        transform: translate(-31%);
         width: 80vw;
     }
 
@@ -297,9 +387,6 @@ input:focus {
         display: block;
     }
 
-    #title {
-        margin-top: -90px;
-    }
 }
 
 #Icon {

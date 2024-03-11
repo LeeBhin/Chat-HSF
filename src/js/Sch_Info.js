@@ -1,49 +1,54 @@
 let All_Info;
 let Student_number;
 
-const openDBForReading = () => {
-    return new Promise((resolve, reject) => {
-        const request = indexedDB.open('myDatabase', 1);
+import info from './info.js'
+import students from './students.js'
+All_Info = info.list
+Student_number = students.list
 
-        request.onerror = (event) => {
-            reject('Failed to open database');
-        };
+// const openDBForReading = () => {
+//     return new Promise((resolve, reject) => {
+//         const request = indexedDB.open('myDatabase', 1);
 
-        request.onsuccess = (event) => {
-            const db = event.target.result;
-            resolve(db);
-        };
-    });
-};
+//         request.onerror = (event) => {
+//             reject('Failed to open database');
+//         };
 
-const fetchDataFromDB = async () => {
-    try {
-        const db = await openDBForReading();
-        const transaction = db.transaction('data', 'readonly');
-        const objectStore = transaction.objectStore('data');
+//         request.onsuccess = (event) => {
+//             const db = event.target.result;
+//             resolve(db);
+//         };
+//     });
+// };
 
-        const schInfoRequest = objectStore.get('schinfo');
-        const stdntRequest = objectStore.get('stdnt');
+// const fetchDataFromDB = async () => {
+//     try {
+//         const db = await openDBForReading();
+//         const transaction = db.transaction('data', 'readonly');
+//         const objectStore = transaction.objectStore('data');
 
-        schInfoRequest.onsuccess = (event) => {
-            const result = event.target.result;
-            if (result) {
-                All_Info = result.data;
-            }
-        };
+//         const schInfoRequest = objectStore.get('schinfo');
+//         const stdntRequest = objectStore.get('stdnt');
 
-        stdntRequest.onsuccess = (event) => {
-            const result = event.target.result;
-            if (result) {
-                Student_number = result.data;
-            }
-        };
-    } catch (error) {
-        console.error('Error fetching data from IndexedDB:', error);
-    }
-};
+//         schInfoRequest.onsuccess = (event) => {
+//             const result = event.target.result;
+//             if (result) {
+//                 All_Info = result.data;
+//             }
+//         };
 
-fetchDataFromDB();
+//         stdntRequest.onsuccess = (event) => {
+//             const result = event.target.result;
+//             if (result) {
+//                 Student_number = result.data;
+//             }
+//         };
+//     } catch (error) {
+//         console.error('Error fetching data from IndexedDB:', error);
+//     }
+// };
+
+// fetchDataFromDB();
 
 
 
