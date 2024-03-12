@@ -34,6 +34,7 @@ function send(question) {
     if (example) {
         // 예시가 화면에 있을 때 삭제
         document.getElementById('ex').remove();
+        document.getElementById('exfx').remove();
         example = false;
     }
 

@@ -120,7 +120,7 @@ header {
   background-color: #54545531;
 }
 
-header > button > span {
+header>button>span {
   padding: 12px;
   position: relative;
   right: 65px;
@@ -135,7 +135,7 @@ header > button > span {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   overflow-x: hidden;
 }
 
@@ -165,7 +165,7 @@ header > button > span {
 
 #ex {
   width: 700px;
-  margin-bottom: 6rem;
+  margin-top: 30vh;
 }
 
 .exlogo {
@@ -258,6 +258,7 @@ input:focus {
 }
 
 #mbheader {
+  background-color: white;
   width: 100%;
   height: 45px;
   line-height: 45px;
@@ -306,6 +307,7 @@ input:focus {
   #extxt {
     width: 26.7vw;
   }
+
   #extxt strong,
   #extxt p {
     font-size: 12px;
@@ -340,6 +342,7 @@ input:focus {
 
   #ex {
     width: 80vw;
+    margin-top: 10vh;
   }
 
   #exfx {
@@ -400,7 +403,7 @@ input:focus {
 }
 
 #scrollDiv {
-  height: 100px;
+  min-height: 100px;
 }
 
 #container {
