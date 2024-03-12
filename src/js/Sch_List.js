@@ -58,48 +58,35 @@ Student_number = students.list
  * @param {Gender} gender_Clean 
  * @returns 
  */
-function ListFunction(jsonData, addressClean, typeArray, gender_Clean) {
-    if (!addressClean) {
-        addressClean = [];
-    }
+function ListFunction(jsonData, addressClean = [], typeArray = [], gender_Clean = []) {
+    console.log("입력 조건:", addressClean, typeArray, gender_Clean, "Sp:", Sp);
 
-    if (!typeArray) {
-        typeArray = [];
-    }
+    // 조건에 맞는 데이터를 저장할 새로운 배열
+    let matchedData = [];
 
-    if (!gender_Clean) {
-        gender_Clean = [];
-    }
-    if (Sp) {   //지역
-        const filteredData = jsonData.filter(data =>
-            (addressClean.length === 0 || addressClean.some(address => //주소 필터
-                (data.SCHUL_RDNMA && data.SCHUL_RDNMA.includes(address)) || (data.ADRES_BRKDN && data.ADRES_BRKDN.includes(address))
-            )) &&
-            (typeArray.length === 0 || typeArray.some(type => //종류 필터
-                data.HS_KND_SC_NM.includes(type)
-            )) &&
-            (gender_Clean.length === 0 || gender_Clean.includes(data.COEDU_SC_CODE))    //성별 필터
-        ).map(data => data.SCHUL_NM);
+    jsonData.forEach(data => {
+        const isAddressMatch = addressClean.length === 0 || addressClean[Sp ? 'some' : 'every'](address =>
+        ((data.SCHUL_RDNMA !== undefined && data.SCHUL_RDNMA.includes(address)) ||
+            (data.ADRES_BRKDN !== undefined && data.ADRES_BRKDN.includes(address)))
+        );
+        const isTypeMatch = typeArray.length === 0 || typeArray.some(type =>
+            data.HS_KND_SC_NM !== undefined && data.HS_KND_SC_NM.includes(type));
+        const isGenderMatch = gender_Clean.length === 0 || gender_Clean.includes(data.COEDU_SC_CODE);
 
-        const printData = filteredData.map(data => '⦁ ' + data.toString()).join('\n');
-        return printData
+        if (isAddressMatch && isTypeMatch && isGenderMatch) {
+            // 조건에 맞는 data.SCHUL_NM을 matchedData 배열에 추가
+            matchedData.push(data.SCHUL_NM);
+        }
+    });
 
-    } else {
-        const filteredData = jsonData.filter(data =>
-            (addressClean.length === 0 || addressClean.every(address => //주소 필터
-                (data.SCHUL_RDNMA && data.SCHUL_RDNMA.includes(address)) || (data.ADRES_BRKDN && data.ADRES_BRKDN.includes(address))
-            )) &&
-            (typeArray.length === 0 || typeArray.some(type => //종류 필터
-                data.HS_KND_SC_NM.includes(type)
-            )) &&
-            (gender_Clean.length === 0 || gender_Clean.includes(data.COEDU_SC_CODE))    //성별 필터
-        ).map(data => data.SCHUL_NM);
+    // matchedData 배열을 사용하여 결과 문자열 생성
+    const printData = matchedData.map(data => '⦁ ' + data).join('\n');
 
-        const printData = filteredData.map(data => '⦁ ' + data.toString()).join('\n');
-        return printData
-    }
+    // 결과 문자열 출력
+    console.log("필터링된 학교 목록:\n" + printData);
+
+    return printData;
 }
-
 
 function stringFilter(str) {    //예외 처리
     str = str.replace(/일반고등학교|일반고|일반학교/g, "Common");
@@ -110,7 +97,6 @@ function stringFilter(str) {    //예외 처리
     str = str.replace(/남자고등학교|남고|남자고|남자학교|남학교/g, "Male");
     str = str.replace(/고등학교/g, " ");
     str = str.replace(/공학|공학학교/g, "Mixed");
-    str = str.replace(/서울/g, "서울특별시");
     str = str.replace(/제주|제주도/g, "제주특별자치도");
     str = str.replace(/강원|강원도/g, "강원특별자치도");
     return str
@@ -154,6 +140,7 @@ function filtered_to_Keyword(str) {
 }
 
 function SchList(string) {
+    console.log(string)
     var Filtered = stringFilter(string) //예외 처리된 문자열
     var Keyword = filtered_to_Keyword(Filtered) //종류,성별
     var adr = address_Only(Filtered, All_Info)  //주소 리스트
@@ -167,7 +154,7 @@ function SchList(string) {
         "types_Return": Types,
         "genders_Return": Genders
     };
-
+    console.log('r', result)
     return result;
 }
 
@@ -176,7 +163,7 @@ function address_Only(input, jsonDataArray) {
     input = input.replace(/ /g, "");
     const result = [];
 
-    const regions = ['경상도', '전라도', '충청도', '경상', '전라', '충청', '경남', '경북', '전남', '전북', '충남', '충북', '전국', '대한민국', '한국', '국내'];
+    const regions = ['서울', '서울시', '경상도', '전라도', '충청도', '경상', '전라', '충청', '경남', '경북', '전남', '전북', '충남', '충북', '전국', '대한민국', '한국', '국내'];
     regions.forEach(region => {
         if (input.includes(region)) {
             if (region == '경상도' || region == '경상') {
@@ -184,7 +171,11 @@ function address_Only(input, jsonDataArray) {
                 result.push('경상남도')
                 result.push('경상북도')
                 input = input.replace(region, '');
-            } else if (region == '전라도' || region == '전라') {
+            } else if (region == '서울' || region == '서울시') {
+                Sp = true;
+                result.push('서울특별시')
+                input = input.replace(region, '');
+            } else if (region == '충청도' || region == '충청') {
                 Sp = true;
                 result.push('전라남도')
                 result.push('전라북도')
@@ -214,15 +205,24 @@ function address_Only(input, jsonDataArray) {
                 input = input.replace(region, '');
             } else if (region == '전국' || '한국' || '대한민국' || '국내') {
                 Sp = true;
-                result.push('경상남도')
-                result.push('경상북도')
-                result.push('전라남도')
-                result.push('전라북도')
-                result.push('충청남도')
-                result.push('충청북도')
-                result.push('강원특별자치도')
-                result.push('경기도')
-                result.push('제주특별자치도')
+                result.push('서울특별시');
+                result.push('부산광역시');
+                result.push('대구광역시');
+                result.push('인천광역시');
+                result.push('광주광역시');
+                result.push('대전광역시');
+                result.push('울산광역시');
+                result.push('세종특별자치시');
+                result.push('경기도');
+                result.push('강원도');
+                result.push('충청북도');
+                result.push('충청남도');
+                result.push('전라북도');
+                result.push('전라남도');
+                result.push('경상북도');
+                result.push('경상남도');
+                result.push('제주특별자치도');
+
                 input = input.replace(region, '');
             }
             else {

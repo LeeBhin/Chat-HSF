@@ -11,8 +11,6 @@ import students from './students.js'
 All_Info = info.list
 Student_number = students.list
 
-console.log(All_Info.list)
-
 // const openDBForReading = () => {
 //     return new Promise((resolve, reject) => {
 //         const request = indexedDB.open('myDatabase', 1);
@@ -65,64 +63,32 @@ async function Answer(Question) {
         objectStore.delete('schinfo');
         objectStore.delete('stdnt');
         objectStore.delete('lastUpdated');
-
         window.location.reload();
     }
-
+    // 데이터 로딩 중인지 확인
     if (!All_Info || !Student_number) {
         return '데이터 로딩중입니다... 잠시만 기다려주세요!\n(데이터 갱신 주기 : 일주일)';
     } else {
         try {
-            if (ifDuplicate) {
-                var num = parseInt(Question);
-                var code = schulCodes[num - 1];
-
-                ifDuplicate = false;
-
-                document.getElementById('answertype').innerText = 'info'
-                document.getElementById('mbheader').innerText = SchInfo(Go)
-                return info_PrintC(code)
-            } else if (!ifDuplicate) {
-                var listReturn = SchList(Question);
-
-                const Go = Question.split('고')[0] + '고';  //'고'까지의 문자열
-                var duplicate = printDuplicates(SchInfo(Go));
-
-                if (compareStrings(Question, SchInfo(Go)) && !listReturn.types_Return && !Question.includes('있는') && !Question.includes('위치') && !Question.includes('소재')) {
-
-                    if (duplicate.length > 1) {  //학교 이름 중복
-
-                        ifDuplicate = true;
-                        document.getElementById('answertype').innerText = 'number'
-                        return Duplicates(duplicate).map((item, index) => `${index + 1}. ${item}`).join('\n');
-
-                    } else {
-                        document.getElementById('answertype').innerText = 'info'
-                        document.getElementById('mbheader').innerText = SchInfo(Go)
-                        document.title = SchInfo(Go)
-                        document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt">
-                            <span> 🏫&nbsp; `+ SchInfo(Go) + `</span>
-                        </button>`);
-
-                        return info_Print(SchInfo(Go))
-                    }
-
-                } else if (!compareStrings(Question, SchInfo(Go))) {
-                    return '학교를 찾을 수 없어요.'
-                } else {
-                    document.getElementById('answertype').innerText = 'list'
-                    if (listReturn.List === "") {
-                        return '조건에 해당하는 학교를 찾을 수 없습니다.'
-                    }
-                    else {
-                        return listReturn.List;
-                    }
-                }
+            // question 문자열에 공백이 있는지 확인
+            if (Question.includes(' ')) {
+                // 공백이 있다면 학교 리스트 반환
+                const schoolList = SchList(Question)
+                return schoolList.List;
+            } else {
+                // 공백이 없다면 특정 학교 정보 반환
+                const Go = Question.split('고')[0] + '고'; // '고'까지의 문자열
+                document.getElementById('answertype').innerText = 'info';
+                document.getElementById('mbheader').innerText = SchInfo(Go);
+                document.title = SchInfo(Go);
+                document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt">
+                    <span> 🏫&nbsp; `+ SchInfo(Go) + `</span>
+                </button>`);
+                return info_Print(SchInfo(Go));
             }
-
         } catch (error) {
-            console.log(error)
-            return '죄송하지만 질문을 다시 한번 확인해주세요.'
+            console.log(error);
+            return '죄송하지만 질문을 다시 한번 확인해주세요.';
         }
     }
 }
