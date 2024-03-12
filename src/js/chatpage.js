@@ -23,7 +23,7 @@ search.addEventListener('input', function () {
 search.addEventListener('keydown', function (event) {
     var question = search.value;
 
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && question != '') {
         // 엔터키를 눌렀을 때 처리
         send(question);
         document.getElementById('searchbar').value = '';
@@ -86,7 +86,7 @@ function Chat(who, chatVal) {
     if (final) {
         var scrollDiv = document.createElement('div');
         scrollDiv.id = 'scrollDiv';
-        document.getElementById('chatpage').appendChild(scrollDiv);
+        document.getElementById('chatpage').append(scrollDiv);
     }
 }
 

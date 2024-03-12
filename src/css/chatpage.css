@@ -1,446 +1,447 @@
 * {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 ::-webkit-scrollbar {
-    width: 7px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #c5c5c5;
-    border-radius: 3px;
+  background-color: #c5c5c5;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #acacac;
+  background-color: #acacac;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 #logs::-webkit-scrollbar-track {
-    background: none;
+  background: none;
 }
 
 body {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 header {
-    width: 245px;
-    height: 100vh;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: center;
-    padding: 8px;
-    float: left;
-    position: relative;
-    z-index: 1;
-    flex-wrap: wrap;
+  width: 245px;
+  height: 100vh;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  float: left;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
 }
 
 .updn {
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-    border: solid 1px rgb(207, 207, 207);
-    position: fixed;
-    z-index: 100;
-    right: 100px;
-    cursor: pointer;
-    text-align: center;
-    line-height: 20px;
-    font-size: 13px;
-    font-weight: bold;
-    transition: .1s;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  border: solid 1px rgb(207, 207, 207);
+  position: fixed;
+  z-index: 100;
+  right: 100px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  transition: 0.1s;
 }
 
 .updn:hover {
-    background-color: #e7e7e7;
+  background-color: #e7e7e7;
 }
 
 #up {
-    bottom: 200px;
+  bottom: 200px;
 }
 
 #down {
-    bottom: 175px;
+  bottom: 175px;
 }
 
 #log {
-    color: #8e8ea0;
-    width: 100%;
-    height: 10px;
-    position: absolute;
-    top: 65px;
-    left: 20px;
-    font-size: 13px;
+  color: #8e8ea0;
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  top: 65px;
+  left: 20px;
+  font-size: 13px;
 }
 
 #logs {
-    width: 100%;
-    height: 88%;
-    margin-top: 5px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+  width: 100%;
+  height: 88%;
+  margin-top: 5px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #logElmt {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    color: white;
-    border-radius: 7px;
-    background: none;
-    margin: 3px;
-    text-align: start;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  color: white;
+  border-radius: 7px;
+  background: none;
+  margin: 3px;
+  text-align: start;
 }
 
 #logElmt span {
-    float: left;
+  float: left;
 }
 
 #apiReload {
-    width: 100%;
-    height: 45px;
-    background: none;
-    cursor: pointer;
-    border: none;
-    color: rgb(8, 8, 8);
-    border-radius: 7px;
-    transition-duration: .1s;
-    position: relative;
-    z-index: 1;
+  width: 100%;
+  height: 45px;
+  background: none;
+  cursor: pointer;
+  border: none;
+  color: rgb(8, 8, 8);
+  border-radius: 7px;
+  transition-duration: 0.1s;
+  position: relative;
+  z-index: 1;
 }
 
 #apiReload:hover {
-    background-color: #54545531;
+  background-color: #54545531;
 }
 
-header>button>span {
-    padding: 12px;
-    position: relative;
-    right: 65px;
-    font-size: 14px;
+header > button > span {
+  padding: 12px;
+  position: relative;
+  right: 65px;
+  font-size: 14px;
 }
 
 #chatpage {
-    text-align: center;
-    position: relative;
-    height: 100vh;
-    overflow-y: scroll;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    overflow-x: hidden;
+  text-align: center;
+  position: relative;
+  height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  overflow-x: hidden;
 }
 
 #exul {
-    display: inline-block;
+  display: inline-block;
 }
 
 #exul p {
-    font-size: 13px;
-    margin-top: 3px;
-    color: gray;
+  font-size: 13px;
+  margin-top: 3px;
+  color: gray;
 }
 
 #extitle {
-    font-size: 18px;
-    color: #343541;
-    margin: 12px;
-    font-weight: bold;
+  font-size: 18px;
+  color: #343541;
+  margin: 12px;
+  font-weight: bold;
 }
 
 #title {
-    color: #343541;
-    font-size: 25px;
-    font-family: '고딕';
-    margin-bottom: 10rem;
+  color: #343541;
+  font-size: 25px;
+  font-family: "고딕";
+  margin-bottom: 10rem;
 }
 
 #ex {
-    width: 700px;
-    margin-bottom: 6rem;
+  width: 700px;
+  margin-bottom: 6rem;
 }
 
 .exlogo {
-    width: 50px;
-    margin: .5rem;
+  width: 50px;
+  margin: 0.5rem;
 }
 
 #extxt {
-    border-radius: 10px;
-    padding: 13px;
-    font-size: 14px;
-    transition: .1s;
-    width: 315px;
-    border: solid 1px #e3e3e3;
-    text-align: start;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 14px;
+  transition: 0.1s;
+  width: 315px;
+  border: solid 1px #e3e3e3;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mb {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #extxt:hover {
-    background-color: rgb(247, 247, 247);
-    cursor: pointer;
+  background-color: rgb(247, 247, 247);
+  cursor: pointer;
 }
 
 #exfx {
-    display: flex;
-    position: absolute;
-    width: 700px;
-    bottom: 6rem;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  display: flex;
+  position: absolute;
+  width: 700px;
+  bottom: 6rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 #exicon img {
-    width: 30px;
+  width: 30px;
 }
 
 .searchbar {
-    width: 700px;
-    padding: 15px;
-    height: 25px;
-    border-radius: 13px;
-    border: solid #e3e3e3 0.5px;
-    border-width: 1px;
-    font-size: 15px;
+  width: 700px;
+  padding: 15px;
+  height: 25px;
+  border-radius: 20px;
+  border: solid #9b9b9b8e 0.5px;
+  border-width: 1px;
+  font-size: 15px;
 }
 
 input:focus {
-    outline: none;
+  outline: none;
+  box-shadow: 0 1px 6px 1px #b3b2b231;
 }
 
 #search {
-    position: fixed;
-    bottom: 3%;
-    z-index: 50;
+  position: fixed;
+  bottom: 3%;
+  z-index: 50;
 }
 
 .searchbar::placeholder {
-    color: rgba(128, 128, 128, 0.616);
-    font-weight: bold;
+  color: rgba(128, 128, 128, 0.616);
 }
 
 .Chat {
-    width: 100%;
-    border-bottom: #d9d9e3 solid 1px;
-    padding: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 30px;
+  width: 100%;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 30px;
 }
 
 #myChat {
-    background-color: white;
+  background-color: white;
 }
 
 #botChat {
-    background-color: rgba(243, 243, 243, 0.8);
+  background-color: white;
 }
 
 #chatsValue {
-    width: 700px;
-    text-align: start;
-    float: left;
+  width: 700px;
+  text-align: start;
+  float: left;
 }
 
 #mbheader {
-    width: 100%;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    display: none;
-    position: absolute;
-    top: 0;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  display: none;
+  position: absolute;
+  top: 0;
 }
 
 @media screen and (max-width: 1279px) {
-    #chatsValue {
-        width: 500px;
-    }
+  #chatsValue {
+    width: 500px;
+  }
 
-    .searchbar,
-    #ex {
-        width: 630px;
-    }
+  .searchbar,
+  #ex {
+    width: 630px;
+  }
 
-    #extxt {
-        width: 280px;
-    }
+  #extxt {
+    width: 280px;
+  }
 
-    #exfx {
-        width: 630px;
-    }
+  #exfx {
+    width: 630px;
+  }
 }
 
 @media screen and (max-width: 1023px) {
-    #chatsValue {
-        width: 50vw;
-    }
+  #chatsValue {
+    width: 50vw;
+  }
 
-    .searchbar {
-        width: 58vw;
-    }
+  .searchbar {
+    width: 58vw;
+  }
 
-    #ex {
-        width: 60vw;
-    }
+  #ex {
+    width: 60vw;
+  }
 
-    #exfx {
-        width: 61vw;
-    }
+  #exfx {
+    width: 61vw;
+  }
 
-    #extxt {
-        width: 27vw;
-    }
+  #extxt {
+    width: 26.7vw;
+  }
+  #extxt strong,
+  #extxt p {
+    font-size: 12px;
+  }
 }
 
 @media screen and (min-width: 768px) {
-    header {
-        transform: translateX(0) !important;
-        /* 화면이 넓을 때 header 항상 표시 */
-    }
+  header {
+    transform: translateX(0) !important;
+    /* 화면이 넓을 때 header 항상 표시 */
+  }
 
-    #mbheader,
-    #mbblck {
-        display: none !important;
-        /* 모바일 메뉴 관련 요소 숨김 */
-    }
+  #mbheader,
+  #mbblck {
+    display: none !important;
+    /* 모바일 메뉴 관련 요소 숨김 */
+  }
 }
 
 @media screen and (max-width: 767px) {
-    #chatsValue {
-        width: 78vw;
-    }
+  #chatsValue {
+    width: 78vw;
+  }
 
-    #hbgbtn {
-        transition: .1s;
-    }
+  #hbgbtn {
+    transition: 0.1s;
+  }
 
-    #xbtn {
-        transition: .1s;
-    }
+  #xbtn {
+    transition: 0.1s;
+  }
 
-    #ex {
-        width: 80vw;
-    }
+  #ex {
+    width: 80vw;
+  }
 
-    #exfx {
-        width: 80vw;
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-    }
+  #exfx {
+    width: 80vw;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
 
-    .exlogo {
-        width: 40px;
-    }
+  .exlogo {
+    width: 40px;
+  }
 
-    #title {
-        font-size: 20px;
-    }
+  #title {
+    font-size: 20px;
+  }
 
-    #exul {
-        width: 100%;
-        /* 전체 너비 사용 */
-        text-align: center;
-        /* 텍스트 중앙 정렬 */
-    }
+  #exul {
+    width: 100%;
+    /* 전체 너비 사용 */
+    text-align: center;
+    /* 텍스트 중앙 정렬 */
+  }
 
-    #extxt {
-        width: 76vw;
-        /* 뷰포트 너비에 맞춰 조정 */
-        margin-bottom: 10px;
-        /* 요소 간 간격 추가 */
-    }
+  #extxt {
+    width: 76vw;
+    /* 뷰포트 너비에 맞춰 조정 */
+    margin-bottom: 10px;
+    /* 요소 간 간격 추가 */
+  }
 
-    header {
-        transform: translateX(-100%);
-        position: absolute;
-        transition: .1s;
-        z-index: 1000;
-    }
+  header {
+    transform: translateX(-100%);
+    position: absolute;
+    transition: 0.1s;
+    z-index: 1000;
+  }
 
-    .searchbar {
-        width: 80vw;
-    }
+  .searchbar {
+    width: 80vw;
+  }
 
-    .updn {
-        right: 30px;
-    }
+  .updn {
+    right: 30px;
+  }
 
-    #mbheader {
-        display: block;
-    }
-
+  #mbheader {
+    display: block;
+  }
 }
 
 #Icon {
-    width: 30px;
-    float: left;
-    margin-right: 20px;
-    float: left;
-    border-radius: 5px;
+  width: 30px;
+  float: left;
+  margin-right: 20px;
+  float: left;
+  border-radius: 5px;
 }
 
 #scrollDiv {
-    height: 100px;
+  height: 100px;
 }
 
-
 #container {
-    overflow: hidden;
-    height: 300px;
-    position: relative;
+  overflow: hidden;
+  height: 300px;
+  position: relative;
 }
 
 #btnRoadview,
 #btnMap {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    padding: 7px 12px;
-    font-size: 14px;
-    border: 1px solid #dbdbdb;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
-    z-index: 1;
-    cursor: pointer;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 7px 12px;
+  font-size: 14px;
+  border: 1px solid #dbdbdb;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  z-index: 1;
+  cursor: pointer;
 }
 
 #btnRoadview:hover,
 #btnMap:hover {
-    background-color: #fcfcfc;
-    border: 1px solid #c1c1c1;
+  background-color: #fcfcfc;
+  border: 1px solid #c1c1c1;
 }
 
 #container.view_map #mapWrapper {
-    z-index: 10;
+  z-index: 10;
 }
 
 #container.view_map #btnMap {
-    display: none;
+  display: none;
 }
 
 #container.view_roadview #mapWrapper {
-    z-index: 0;
+  z-index: 0;
 }
 
 #container.view_roadview #btnRoadview {
-    display: none;
+  display: none;
 }
