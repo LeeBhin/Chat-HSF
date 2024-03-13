@@ -23,7 +23,7 @@ search.addEventListener('input', function () {
 search.addEventListener('keydown', function (event) {
     var question = search.value;
 
-    if (event.key === 'Enter' && question != '') {
+    if (!isPrinting && event.key === 'Enter' && question != '') {
         // 엔터키를 눌렀을 때 처리
         send(question);
         document.getElementById('searchbar').value = '';
@@ -90,14 +90,15 @@ function Chat(who, chatVal) {
         document.getElementById('chatpage').append(scrollDiv);
     }
 }
-
+var isPrinting = false;
 // 한 글자씩 출력하는 함수 (주소 클릭 시 새 탭에서 열리는 버전)
 function printOneByOne(text, chatsValue) {
+    isPrinting = true;
     text.then(result => {
         text = result
 
         var index = 0;
-        var interval = 2; // 출력 간격(ms)
+        var interval = 1; // 출력 간격(ms)
 
         function addNextCharacter() {
             if (index < text.length) {
@@ -129,6 +130,8 @@ function printOneByOne(text, chatsValue) {
                 }
 
                 setTimeout(addNextCharacter, interval);
+            } else {
+                isPrinting = false;
             }
 
             var chatpage = document.getElementById('chatpage');

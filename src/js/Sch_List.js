@@ -1,54 +1,54 @@
 let All_Info;
 let Student_number;
 
-import info from './info.js'
-import students from './students.js'
-All_Info = info.list
-Student_number = students.list
+// import info from './info.js'
+// import students from './students.js'
+// All_Info = info.list
+// Student_number = students.list
 
-// const openDBForReading = () => {
-//     return new Promise((resolve, reject) => {
-//         const request = indexedDB.open('myDatabase', 1);
+const openDBForReading = () => {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('myDatabase', 1);
 
-//         request.onerror = (event) => {
-//             reject('Failed to open database');
-//         };
+        request.onerror = (event) => {
+            reject('Failed to open database');
+        };
 
-//         request.onsuccess = (event) => {
-//             const db = event.target.result;
-//             resolve(db);
-//         };
-//     });
-// };
+        request.onsuccess = (event) => {
+            const db = event.target.result;
+            resolve(db);
+        };
+    });
+};
 
-// const fetchDataFromDB = async () => {
-//     try {
-//         const db = await openDBForReading();
-//         const transaction = db.transaction('data', 'readonly');
-//         const objectStore = transaction.objectStore('data');
+const fetchDataFromDB = async () => {
+    try {
+        const db = await openDBForReading();
+        const transaction = db.transaction('data', 'readonly');
+        const objectStore = transaction.objectStore('data');
 
-//         const schInfoRequest = objectStore.get('schinfo');
-//         const stdntRequest = objectStore.get('stdnt');
+        const schInfoRequest = objectStore.get('schinfo');
+        const stdntRequest = objectStore.get('stdnt');
 
-//         schInfoRequest.onsuccess = (event) => {
-//             const result = event.target.result;
-//             if (result) {
-//                 All_Info = result.data;
-//             }
-//         };
+        schInfoRequest.onsuccess = (event) => {
+            const result = event.target.result;
+            if (result) {
+                All_Info = result.data;
+            }
+        };
 
-//         stdntRequest.onsuccess = (event) => {
-//             const result = event.target.result;
-//             if (result) {
-//                 Student_number = result.data;
-//             }
-//         };
-//     } catch (error) {
-//         console.error('Error fetching data from IndexedDB:', error);
-//     }
-// };
+        stdntRequest.onsuccess = (event) => {
+            const result = event.target.result;
+            if (result) {
+                Student_number = result.data;
+            }
+        };
+    } catch (error) {
+        console.error('Error fetching data from IndexedDB:', error);
+    }
+};
 
-// fetchDataFromDB();
+fetchDataFromDB();
 
 /**
  * 
@@ -59,7 +59,6 @@ Student_number = students.list
  * @returns 
  */
 function ListFunction(jsonData, addressClean = [], typeArray = [], gender_Clean = []) {
-    console.log("입력 조건:", addressClean, typeArray, gender_Clean, "Sp:", Sp);
 
     // 조건에 맞는 데이터를 저장할 새로운 배열
     let matchedData = [];
@@ -82,9 +81,6 @@ function ListFunction(jsonData, addressClean = [], typeArray = [], gender_Clean 
     // matchedData 배열을 사용하여 결과 문자열 생성
     const printData = matchedData.map(data => '⦁ ' + data).join('\n');
 
-    // 결과 문자열 출력
-    console.log("필터링된 학교 목록:\n" + printData);
-
     return printData;
 }
 
@@ -97,8 +93,6 @@ function stringFilter(str) {    //예외 처리
     str = str.replace(/남자고등학교|남고|남자고|남자학교|남학교/g, "Male");
     str = str.replace(/고등학교/g, " ");
     str = str.replace(/공학|공학학교/g, "Mixed");
-    str = str.replace(/제주|제주도/g, "제주특별자치도");
-    str = str.replace(/강원|강원도/g, "강원특별자치도");
     return str
 }
 
@@ -127,7 +121,20 @@ function filtered_to_Keyword(str) {
         "Free": "자율고등학교",
         "Female": "녀",
         "Male": "남",
-        "Mixed": "남녀공학"
+        "Mixed": "남녀공학",
+        "부산": "부산광역시",
+        "대구": "대구광역시",
+        "인천": "인천광역시",
+        "광주": "광주광역시",
+        "대전": "대전광역시",
+        "울산": "울산광역시",
+        "세종": "세종특별자치시",
+        "부산시": "부산광역시",
+        "대구시": "대구광역시",
+        "인천시": "인천광역시",
+        "대전시": "대전광역시",
+        "울산시": "울산광역시",
+        "세종시": "세종특별자치시",
     };
 
     for (const key in result) {
@@ -140,7 +147,6 @@ function filtered_to_Keyword(str) {
 }
 
 function SchList(string) {
-    console.log(string)
     var Filtered = stringFilter(string) //예외 처리된 문자열
     var Keyword = filtered_to_Keyword(Filtered) //종류,성별
     var adr = address_Only(Filtered, All_Info)  //주소 리스트
@@ -154,55 +160,50 @@ function SchList(string) {
         "types_Return": Types,
         "genders_Return": Genders
     };
-    console.log('r', result)
     return result;
 }
 
 var Sp = false
-function address_Only(input, jsonDataArray) {
-    input = input.replace(/ /g, "");
-    const result = [];
+function address_Only(input) {
+    Sp = false
+    var result = input.split(' ').filter(item => item.trim() !== '');
+    // const result = [];
 
-    const regions = ['서울', '서울시', '경상도', '전라도', '충청도', '경상', '전라', '충청', '경남', '경북', '전남', '전북', '충남', '충북', '전국', '대한민국', '한국', '국내'];
+    const regions = ['서울', '서울시', '경기', '경기도', '강원', '강원도', '경상도', '전라도', '충청도', '경상', '전라', '충청', '경남', '경북', '전남', '전북', '충남', '충북', '제주', '제주도', '제주시', '전국', '대한민국', '한국', '국내'];
     regions.forEach(region => {
         if (input.includes(region)) {
             if (region == '경상도' || region == '경상') {
                 Sp = true;
                 result.push('경상남도')
                 result.push('경상북도')
-                input = input.replace(region, '');
             } else if (region == '서울' || region == '서울시') {
-                Sp = true;
                 result.push('서울특별시')
-                input = input.replace(region, '');
-            } else if (region == '충청도' || region == '충청') {
+            } else if (region == '강원' || region == '강원도') {
+                result.push('강원특별자치도')
+            } else if (region == '제주' || region == '제주시' || region == '제주도') {
+                result.push('제주특별자치도')
+            } else if (region == '경기' || region == '경기도') {
+                result.push('경기도')
+            } else if (region == '전라도' || region == '전라') {
                 Sp = true;
                 result.push('전라남도')
                 result.push('전라북도')
-                input = input.replace(region, '');
             } else if (region == '충청도' || region == '충청') {
                 Sp = true;
                 result.push('충청남도')
                 result.push('충청북도')
-                input = input.replace(region, '');
             } else if (region == '경남') {
                 result.push('경상남도')
-                input = input.replace(region, '');
             } else if (region == '경북') {
                 result.push('경상북도')
-                input = input.replace(region, '');
             } else if (region == '전남') {
                 result.push('전라남도')
-                input = input.replace(region, '');
             } else if (region == '전북') {
                 result.push('전라북도')
-                input = input.replace(region, '');
             } else if (region == '충남') {
                 result.push('충청남도')
-                input = input.replace(region, '');
             } else if (region == '충북') {
                 result.push('충청북도')
-                input = input.replace(region, '');
             } else if (region == '전국' || '한국' || '대한민국' || '국내') {
                 Sp = true;
                 result.push('서울특별시');
@@ -222,52 +223,14 @@ function address_Only(input, jsonDataArray) {
                 result.push('경상북도');
                 result.push('경상남도');
                 result.push('제주특별자치도');
-
-                input = input.replace(region, '');
             }
-            else {
-                result.push(region)
-                input = input.replace(region, '');
-            }
-
+            result = result.filter(re => re !== region);
         }
 
     });
-    const checkArray = (arr) => {
-        for (let i = 0; i < arr.length; i++) {
-            if (input.includes(arr[i]) || isSubstringInOrder(input, arr[i])) {
-                result.push(arr[i]);
-                input = input.replace(arr[i], ''); // input에서 해당 문자열 제거
-            }
-        }
-    };
-
-    const isSubstringInOrder = (str, substring) => {
-        let strIndex = 0;
-        let subIndex = 0;
-        let matchCount = 0;
-
-        while (strIndex < str.length && subIndex < substring.length) {
-            if (str[strIndex] === substring[subIndex]) {
-                subIndex++;
-                matchCount++;
-            }
-            strIndex++;
-        }
-
-        return matchCount >= 3;
-    };
-
-    for (let i = 0; i < jsonDataArray.length; i++) {
-        const jsonData = jsonDataArray[i];
-        if (jsonData.ADRES_BRKDN) {
-            checkArray(jsonData.ADRES_BRKDN.split(' '), 'ADRES_BRKDN');
-        }
-
-        if (result.length === 0 && jsonData.SCHUL_RDNMA) {
-            checkArray(jsonData.SCHUL_RDNMA.split(' '), 'SCHUL_RDNMA');
-        }
-    }
+    result = result.filter(re => re !== '남녀Mixed');
+    result = result.filter(item => !/^[A-Za-z]+$/.test(item));
+    result = [...new Set(result)];
     return result;
 }
 

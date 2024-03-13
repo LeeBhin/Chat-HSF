@@ -92,7 +92,7 @@ header {
   width: 100%;
   padding: 12px;
   border: none;
-  color: white;
+  color: black;
   border-radius: 7px;
   background: none;
   margin: 3px;
@@ -178,7 +178,7 @@ header>button>span {
   padding: 13px;
   font-size: 14px;
   transition: 0.1s;
-  width: 315px;
+  width: 325px;
   border: solid 1px #e3e3e3;
   text-align: start;
   white-space: nowrap;
@@ -198,7 +198,7 @@ header>button>span {
 #exfx {
   display: flex;
   position: absolute;
-  width: 700px;
+  width: 720px;
   bottom: 6rem;
   align-items: center;
   justify-content: space-between;
@@ -210,7 +210,7 @@ header>button>span {
 }
 
 .searchbar {
-  width: 700px;
+  width: 720px;
   padding: 15px;
   height: 25px;
   border-radius: 20px;
