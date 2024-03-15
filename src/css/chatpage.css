@@ -136,7 +136,7 @@ header>button>span {
 
 
 #chatpage {
-  margin-top: 45px;
+  margin-top: 0;
   text-align: center;
   position: relative;
   height: calc(90vh - 90px);
