@@ -22,7 +22,7 @@
   </div>
 
   <header>
-    <button id="apiReload" onclick="apiupdate();">
+    <button id="apiReload" onclick="fetchDataFromAPI();">
       <span><svg xmlns="http://www.w3.org/2000/svg" width="16px"
           viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
@@ -233,18 +233,6 @@
         container.className = "view_roadview"; // 로드뷰가 보이도록 클래스 변경
       }
     }
-  }
-
-  async function apiupdate() {
-    const db = await openDB();
-    const transaction = db.transaction("data", "readwrite");
-    const objectStore = transaction.objectStore("data");
-
-    objectStore.delete("schinfo");
-    objectStore.delete("stdnt");
-    objectStore.delete("lastUpdated");
-
-    fetchDataFromAPI();
   }
 
   const header = document.querySelector("header");
