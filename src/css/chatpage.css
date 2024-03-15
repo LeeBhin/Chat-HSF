@@ -131,10 +131,8 @@ header>button>span {
 
 
 #chatpage {
-  margin-top: 0;
   text-align: center;
-  position: relative;
-  height: calc(100vh - 80px);
+  height: 100vh;
   overflow-y: scroll;
   display: flex;
   align-items: center;
@@ -199,10 +197,10 @@ header>button>span {
 }
 
 #exfx {
-  display: flex;
   position: absolute;
+  bottom: 15vh;
+  display: flex;
   width: 720px;
-  bottom: 1vh;
   align-items: center;
   justify-content: space-between;
 }
@@ -215,7 +213,7 @@ header>button>span {
   width: 720px;
   padding: 15px;
   height: 25px;
-  border-radius: 20px;
+  border-radius: 15px;
   border: solid #9b9b9b8e 0.5px;
   border-width: 1px;
   font-size: 15px;
@@ -402,8 +400,8 @@ input:focus {
 
 @media screen and (max-width: 767px) {
   #chatpage {
-    height: calc(100vh - 80px);
-    margin-top: 145px;
+    height: 100vh;
+    margin-top: 45px;
   }
 
   header {
@@ -425,14 +423,13 @@ input:focus {
 
   #ex {
     width: 80vw;
-    margin-top: 1vh;
+    margin-top: 10vh;
   }
 
   #exfx {
     width: 80vw;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 35vh;
   }
 
   .exlogo {
