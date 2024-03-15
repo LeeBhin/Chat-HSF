@@ -74,7 +74,6 @@ header {
   font-size: 13px;
 }
 
-
 #logs {
   width: 100%;
   height: 88%;
@@ -82,7 +81,6 @@ header {
   overflow-y: scroll;
   overflow-x: hidden;
 }
-
 
 #logElmt {
   width: 100%;
@@ -95,11 +93,9 @@ header {
   text-align: start;
 }
 
-
 #logElmt span {
   float: left;
 }
-
 
 #apiReload {
   width: 100%;
@@ -114,7 +110,6 @@ header {
   z-index: 1;
   display: flex;
 }
-
 
 #apiReload:hover {
   background-color: #54545531;
@@ -147,18 +142,15 @@ header>button>span {
   overflow-x: hidden;
 }
 
-
 #exul {
   display: inline-block;
 }
-
 
 #exul p {
   font-size: 13px;
   margin-top: 3px;
   color: gray;
 }
-
 
 #extitle {
   font-size: 18px;
@@ -167,7 +159,6 @@ header>button>span {
   font-weight: bold;
 }
 
-
 #title {
   color: #343541;
   font-size: 25px;
@@ -175,18 +166,15 @@ header>button>span {
   margin-bottom: 10rem;
 }
 
-
 #ex {
   width: 700px;
   margin-top: 30vh;
 }
 
-
 .exlogo {
   width: 50px;
   margin: 0.5rem;
 }
-
 
 #extxt {
   border-radius: 10px;
@@ -201,17 +189,14 @@ header>button>span {
   text-overflow: ellipsis;
 }
 
-
 .mb {
   margin-bottom: 10px;
 }
-
 
 #extxt:hover {
   background-color: rgb(247, 247, 247);
   cursor: pointer;
 }
-
 
 #exfx {
   display: flex;
@@ -222,11 +207,9 @@ header>button>span {
   justify-content: space-between;
 }
 
-
 #exicon img {
   width: 30px;
 }
-
 
 .searchbar {
   width: 720px;
@@ -236,14 +219,13 @@ header>button>span {
   border: solid #9b9b9b8e 0.5px;
   border-width: 1px;
   font-size: 15px;
+  margin: 0 auto;
 }
-
 
 input:focus {
   outline: none;
   box-shadow: 0 1px 6px 1px #b3b2b231;
 }
-
 
 #search {
   position: fixed;
@@ -254,6 +236,21 @@ input:focus {
   background-color: white;
 }
 
+.searchDiv {
+  width: 720px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  position: relative;
+}
+
+#sendIcon {
+  position: absolute;
+  right: 25px;
+  cursor: pointer;
+}
+
 .toSearchScroll {
   min-height: 90px;
 }
@@ -261,7 +258,6 @@ input:focus {
 .searchbar::placeholder {
   color: rgba(128, 128, 128, 0.616);
 }
-
 
 .Chat {
   width: 100%;
@@ -272,11 +268,9 @@ input:focus {
   line-height: 30px;
 }
 
-
 #myChat {
   background-color: white;
 }
-
 
 #botChat {
   background-color: white;
@@ -341,7 +335,7 @@ input:focus {
     width: 500px;
   }
 
-
+  .searchDiv,
   .searchbar,
   #ex {
     width: 630px;
@@ -364,6 +358,7 @@ input:focus {
     width: 50vw;
   }
 
+  .searchDiv,
   .searchbar {
     width: 58vw;
   }
@@ -466,6 +461,7 @@ input:focus {
     z-index: 1000;
   }
 
+  .searchDiv,
   .searchbar {
     width: 80vw;
   }

@@ -2,20 +2,21 @@ import { Answer } from "./decision.js"
 
 import { findCode } from "./Sch_Info.js";
 
+const search = document.getElementById('searchbar');
+const sendBtn = document.getElementById('sendIcon');
+
 // 초기 변수 설정
 var example = true;
-
-// 검색창 요소 가져오기
-const search = document.getElementById('searchbar');
+var isPrinting = false; // isPrinting 변수 추가 및 초기화
 
 // 검색창 입력 이벤트 리스너 추가
-search.addEventListener('input', function () {
-    if (document.getElementById('searchbar').value == '') {
-        // 검색창이 비어있을 때 처리
-        // document.getElementById('sendimg').classList.remove('sendpb')
-    } else {
-        // 검색창이 비어있지 않을 때 처리
-        // document.getElementById('sendimg').classList.add('sendpb')
+sendBtn.addEventListener('click', function () {
+    var question = search.value;
+
+    if (!isPrinting && question !== '') {
+        // 엔터키를 눌렀을 때 처리
+        send(question);
+        document.getElementById('searchbar').value = '';
     }
 });
 
@@ -23,12 +24,21 @@ search.addEventListener('input', function () {
 search.addEventListener('keydown', function (event) {
     var question = search.value;
 
-    if (!isPrinting && event.key === 'Enter' && question != '') {
+    if (!isPrinting && event.key === 'Enter' && question !== '') {
         // 엔터키를 눌렀을 때 처리
         send(question);
         document.getElementById('searchbar').value = '';
     }
 });
+
+// isPrinting이 false이거나 question이 빈 문자열이라면 sendBtn의 투명도를 조절하여 비활성화
+setInterval(function () {
+    if (isPrinting || search.value === '') {
+        sendBtn.style.opacity = '0.5'; // 비활성화 상태일 때 투명도 조절
+    } else {
+        sendBtn.style.opacity = '1'; // 활성화 상태일 때 투명도 원래대로 설정
+    }
+}, 100); // 매 100밀리초마다 상태 체크
 
 function send(question) {
     if (example) {
