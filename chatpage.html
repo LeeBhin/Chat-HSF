@@ -244,7 +244,10 @@
     objectStore.delete("stdnt");
     objectStore.delete("lastUpdated");
 
+    checkAndUpdateData();
+
     window.location.reload();
+
   }
 
   const header = document.querySelector("header");
