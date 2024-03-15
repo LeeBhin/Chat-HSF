@@ -289,7 +289,7 @@ input:focus {
 }
 
 #scrollDiv {
-  min-height: 100px;
+  min-height: 50px;
 }
 
 #mbheader {
@@ -408,7 +408,7 @@ input:focus {
 @media screen and (max-width: 767px) {
   #chatpage {
     height: calc(100vh - 80px);
-    margin-top: 45px;
+    margin-top: 145px;
   }
 
   header {
