@@ -6,8 +6,8 @@ exports.handler = async function (event, context, callback) {
     const currentYear = new Date().getFullYear().toString();
 
     const urls = [
-      `https://www.schoolinfo.go.kr/openApi.do?apiKey=09f9b2bf2e3b4daea8e4f4b88f22b7df&apiType=0&pbanYr=${currentYear}&schulKndCode=04`,
-      `https://www.schoolinfo.go.kr/openApi.do?apiKey=09f9b2bf2e3b4daea8e4f4b88f22b7df&apiType=63&pbanYr=${currentYear}&schulKndCode=04`
+      `https://www.schoolinfo.go.kr/openApi.do?apiKey=26d54804261e8253a38f2d6c11530953&apiType=0&pbanYr=${currentYear}&schulKndCode=04`,
+      `https://www.schoolinfo.go.kr/openApi.do?apiKey=26d54804261e8253a38f2d6c11530953&apiType=63&pbanYr=${currentYear}&schulKndCode=04`
     ];
 
     const responses = await Promise.all(

@@ -93,7 +93,7 @@ async function Answer(Question) {
                 ifDuplicate = false;
 
                 document.getElementById('answertype').innerText = 'info'
-                document.getElementById('mbheader').innerText = SchInfo(Go)
+                document.getElementById('mheaderTitle').innerText = SchInfo(Go)
 
                 return info_Print(code, true)
             }
@@ -106,7 +106,7 @@ async function Answer(Question) {
                     return '번호를 입력해주세요.\n' + Duplicates(duplicate).map((item, index) => `${index + 1}. ${item}`).join('\n');
                 } else {
                     document.getElementById('answertype').innerText = 'info';
-                    document.getElementById('mbheader').innerText = SchInfo(Go);
+                    document.getElementById('mheaderTitle').innerText = SchInfo(Go);
                     document.title = SchInfo(Go);
                     document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt"><span> 🏫&nbsp;` + SchInfo(Go) + `</span></button>`);
                     return info_Print(SchInfo(Go), false);
