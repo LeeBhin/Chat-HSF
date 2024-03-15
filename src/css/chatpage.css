@@ -288,6 +288,10 @@ input:focus {
   float: left;
 }
 
+#scrollDiv {
+  min-height: 100px;
+}
+
 #mbheader {
   background-color: white;
   width: 100%;
