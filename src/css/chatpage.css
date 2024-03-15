@@ -198,7 +198,7 @@ header>button>span {
 
 #exfx {
   position: absolute;
-  bottom: 15vh;
+  bottom: 10vh;
   display: flex;
   width: 720px;
   align-items: center;
@@ -400,7 +400,6 @@ input:focus {
 
 @media screen and (max-width: 767px) {
   #chatpage {
-    height: 100vh;
     margin-top: 45px;
   }
 

@@ -296,6 +296,15 @@
   if (window.innerWidth >= 768) {
     closeMenu(); // 초기 상태에서 화면이 넓으면 메뉴 닫기
   }
+
+  function setElementHeight() {
+    var vh = window.innerHeight * 0.01;
+    document.getElementById('#chatpage').style.setProperty('--vh', `${vh}px`);
+  }
+
+  // 페이지 로드 및 브라우저 크기 변경시 setElementHeight 함수 호출
+  window.addEventListener('resize', setElementHeight);
+  window.addEventListener('load', setElementHeight);
 </script>
 
 
