@@ -22,7 +22,7 @@
   </div>
 
   <header>
-    <button id="apiReload" onclick="apiupdate(); window.location.reload();">
+    <button id="apiReload" onclick="apiupdate();">
       <span><svg xmlns="http://www.w3.org/2000/svg" width="16px"
           viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
@@ -136,11 +136,11 @@
       ]);
 
       console.log('Data saved to IndexedDB successfully');
-      location.reload();
     } catch (error) {
       alert('오류가 발생했습니다. 새로고침해주세요.\n' + error);
       location.reload();
     }
+    location.reload();
   };
 
   const checkAndUpdateData = async () => {
@@ -245,7 +245,6 @@
     objectStore.delete("lastUpdated");
 
     fetchDataFromAPI();
-
   }
 
   const header = document.querySelector("header");
