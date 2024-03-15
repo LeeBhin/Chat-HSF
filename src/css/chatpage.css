@@ -139,7 +139,7 @@ header>button>span {
   margin-top: 0;
   text-align: center;
   position: relative;
-  height: calc(90vh - 90px);
+  height: calc(100vh - 90px);
   overflow-y: scroll;
   display: flex;
   align-items: center;
