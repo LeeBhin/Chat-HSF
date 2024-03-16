@@ -94,8 +94,6 @@ async function Answer(Question) {
 
                 document.getElementById('answertype').innerText = 'info'
                 document.getElementById('mheaderTitle').innerText = SchInfo(Go)
-                document.title = SchInfo(Go);
-                document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt"><span> 🏫&nbsp;` + SchInfo(Go) + `</span></button>`);
 
                 return info_Print(code, true)
             }

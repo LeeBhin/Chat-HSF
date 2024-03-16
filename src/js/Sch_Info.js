@@ -154,6 +154,12 @@ function info_Print(identifier, isCode = false) {
     // 학교 코드 출력
     document.getElementById('code').innerText = schoolData.SCHUL_CODE;
 
+    if (isCode) {
+        document.getElementById('mheaderTitle').innerText = schoolData.SCHUL_RDNDA;
+        document.title = schoolData.SCHUL_RDNDA;
+        document.getElementById('logs').insertAdjacentHTML('beforeend', `<button id="logElmt"><span> 🏫&nbsp;` + schoolData.SCHUL_RDNDA + `</span></button>`);
+    }
+
     // 개교일과 설립연도 포맷팅
     const Open = date(schoolData.FOAS_MEMRD);
     const birthYear = `${schoolData.FOND_YMD.substring(0, 4)}년`;

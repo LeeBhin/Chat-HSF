@@ -162,7 +162,7 @@ function printOneByOne(text, chatsValue) {
                 drawMap(w, g)
                 var chatpage = document.getElementById('chatpage');
                 chatpage.scrollTo({ top: chatpage.scrollHeight, behavior: 'smooth' });
-            }, text.length * 5);
+            }, text.length * 5.5);
         }
     })
 }
