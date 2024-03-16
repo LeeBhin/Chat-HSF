@@ -135,7 +135,6 @@ function SchInfo(inputString) {
 // 중복 데이터를 필터링하여 반환하는 함수
 function printDuplicates(Sch) {
     const filteredInfo = All_Info.filter(item => item.SCHUL_NM === Sch);
-    console.log(filteredInfo.map(({ SCHUL_NM, SCHUL_RDNDA, SCHUL_CODE }) => ({ SCHUL_NM, SCHUL_RDNDA, SCHUL_CODE })));
     return filteredInfo.map(({ SCHUL_NM, SCHUL_RDNDA, SCHUL_CODE }) => ({ SCHUL_NM, SCHUL_RDNDA, SCHUL_CODE }));
 }
 

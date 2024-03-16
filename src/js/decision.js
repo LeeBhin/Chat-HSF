@@ -83,6 +83,7 @@ async function Answer(Question) {
                     "!설명서"를 통해 사용법을 확인하실 수 있습니다.`;
                 }
                 const schoolList = SchList(Question)
+                console.log(schoolList)
                 return schoolList.List;
             }
             else if (ifDuplicate) {
