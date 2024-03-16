@@ -50,33 +50,36 @@
       </svg>
     </div>
 
-    <div id="ex">
-      <img src="src/images/search.png" alt="" class="exlogo" />
-      <h1 id="title">어떤 학교를 찾고 계신가요?</h1>
-
-    </div>
     <div id="exfx">
-      <div id="exul" class="hv">
-        <div id="extxt" class="mb" onclick="ex(this)">
-          <strong>지역, 종류, 성별로 고등학교 찾기</strong>
-          <p>"서울 특성화고 남녀공학"</p>
+      <div id="ex">
+        <img src="src/images/search.png" alt="" class="exlogo" />
+        <h1 id="title">어떤 학교를 찾고 계신가요?</h1>
+      </div>
+
+      <div class="exDiv">
+        <div id="exul">
+          <div id="extxt" class="mb" onclick="ex(this)">
+            <strong>지역, 종류, 성별로 고등학교 찾기</strong>
+            <p>"서울 특성화고 남녀공학"</p>
+          </div>
+          <div id="extxt" onclick="ex(this)">
+            <strong>데이터 수동으로 업데이트하기</strong>
+            <p>"!업데이트"</p>
+          </div>
         </div>
-        <div id="extxt" onclick="ex(this)">
-          <strong>데이터 수동으로 업데이트하기</strong>
-          <p>"!업데이트"</p>
+
+        <div id="exul">
+          <div id="extxt" class="mb" onclick="ex(this)">
+            <strong>이름으로 고등학교 찾기</strong>
+            <p>"세명컴퓨터고등학교 / 세명컴고"</p>
+          </div>
+          <div id="extxt" onclick="ex(this)">
+            <strong>사용 설명서 보기</strong>
+            <p>"!설명서"</p>
+          </div>
         </div>
       </div>
 
-      <div id="exul">
-        <div id="extxt" class="mb" onclick="ex(this)">
-          <strong>이름으로 고등학교 찾기</strong>
-          <p>"세명컴퓨터고등학교 / 세명컴고"</p>
-        </div>
-        <div id="extxt" onclick="ex(this)">
-          <strong>사용 설명서 보기</strong>
-          <p>"!설명서"</p>
-        </div>
-      </div>
     </div>
 
     <div id="search">
@@ -184,7 +187,7 @@
     };
   };
 
-  // checkAndUpdateData();
+  checkAndUpdateData();
 
   const scrollContainer = document.getElementById('chatpage');
   const targetDiv = document.getElementById('down');
@@ -297,14 +300,29 @@
     closeMenu(); // 초기 상태에서 화면이 넓으면 메뉴 닫기
   }
 
-  function setElementHeight() {
-    var vh = window.innerHeight * 0.01;
-    document.getElementById('chatpage').style.setProperty('--vh', `${vh}px`);
+  // 현재 디바이스를 감지하여 클래스를 추가 또는 제거
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    document.getElementById('chatpage').classList.add('mobile');
+  } else {
+    document.documentElement.classList.add('pc');
   }
 
-  // 페이지 로드 및 브라우저 크기 변경시 setElementHeight 함수 호출
-  window.addEventListener('resize', setElementHeight);
-  window.addEventListener('load', setElementHeight);
+  // 뷰포트의 높이를 가져오는 함수
+  function getViewportHeight() {
+    return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  }
+
+  // 뷰포트의 높이를 가져와서 vh 단위로 변환하여 CSS에 적용하는 함수
+  function updateElementHeight() {
+    var viewportHeight = getViewportHeight();
+    var vhValue = viewportHeight * 0.01; // 1vh의 크기 계산
+    document.getElementById('chatpage').style.setProperty('--vh', vhValue + 'px');
+  }
+
+  // 페이지 로드 시와 윈도우 리사이즈 시에 호출하여 요소의 높이를 업데이트
+  window.addEventListener('load', updateElementHeight);
+  window.addEventListener('resize', updateElementHeight);
+
 </script>
 
 
