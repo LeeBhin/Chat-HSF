@@ -220,7 +220,7 @@ header>button>span {
 }
 
 .searchbar {
-  width: 720px;
+  width: 100%;
   padding: 15px;
   height: 25px;
   border-radius: 15px;
