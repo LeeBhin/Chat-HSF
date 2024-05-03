@@ -57,10 +57,10 @@ function Chat(who, chatVal) {
     var chatsValue = document.createElement('div');
     chatsValue.id = 'chatsValue';
 
-    var rmdiv = document.getElementById('scrollDiv');
-    if (rmdiv) {
-        rmdiv.parentNode.removeChild(rmdiv);
-    }
+    // var rmdiv = document.getElementById('scrollDiv');
+    // if (rmdiv) {
+    //     rmdiv.parentNode.removeChild(rmdiv);
+    // }
     var final = false;
 
     var chats = document.createElement('div');
@@ -94,11 +94,11 @@ function Chat(who, chatVal) {
     chats.appendChild(chatsWrap);
     document.getElementById('chatpage').appendChild(chats);
 
-    if (final) {
-        var scrollDiv = document.createElement('div');
-        scrollDiv.id = 'scrollDiv';
-        document.getElementById('chatpage').append(scrollDiv);
-    }
+    // if (final) {
+    //     var scrollDiv = document.createElement('div');
+    //     scrollDiv.id = 'scrollDiv';
+    //     document.getElementById('chatpage').append(scrollDiv);
+    // }
 }
 var isPrinting = false;
 // 한 글자씩 출력하는 함수 (주소 클릭 시 새 탭에서 열리는 버전)
