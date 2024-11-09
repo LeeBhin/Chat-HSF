@@ -30,7 +30,7 @@
 - '서울 은평구 남고 여고 특성화고 특목고'
 
 ## 프로젝트 정보
-- 프로젝트 페이지: [Chat-HSF](https://highschoolfinder.netlify.app/)
+- 프로젝트 페이지: [Chat-HSF](https://highschfinder.netlify.app/)
 - 데이터 제공: 학교알리미 API
 - 호스팅: Netlify
 
